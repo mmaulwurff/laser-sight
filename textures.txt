@@ -1,0 +1,47 @@
+sprite WDO0A0, 8, 8
+{
+  Sprite WDOTA0, 0, 0
+  Offset 4, 4
+  XScale 8.0
+  YScale 9.6
+}
+
+sprite WDO1A0, 8, 8
+{
+  Sprite WDOTA0, 0, 0
+  Offset 4, 4
+  XScale 4.0
+  YScale 4.8
+}
+
+sprite WDO2A0, 8, 8
+{
+  Sprite WDOTA0, 0, 0
+  Offset 4, 4
+  XScale 2.0
+  YScale 2.4
+}
+
+sprite WDO3A0, 8, 8
+{
+  Sprite WDOTA0, 0, 0
+  Offset 4, 4
+  XScale 1.0
+  YScale 1.2
+}
+
+sprite WDO4A0, 8, 8
+{
+  Sprite WDOTA0, 0, 0
+  Offset 4, 4
+  XScale 0.5
+  YScale 0.6
+}
+
+sprite WDO5A0, 8, 8
+{
+  Sprite WDOTA0, 0, 0
+  Offset 4, 4
+  XScale 16.0
+  YScale 19.2
+}

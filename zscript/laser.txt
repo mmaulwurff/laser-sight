@@ -1,0 +1,48 @@
+class WM_PuffBase : Actor
+{
+  Default
+  {
+    Mass 0;
+    Radius 1;
+    Height 2;
+    +NOBLOCKMAP;
+    +NOGRAVITY;
+    +BLOODLESSIMPACT;
+    +PUFFONACTORS;
+    +DONTSPLASH;
+    +NOTRIGGER;
+    +FORCEXYBILLBOARD;
+    +NOTONAUTOMAP;
+  }
+
+  States
+    {
+    Spawn:
+      TNT1 A 0;
+      WDOB A 1 BRIGHT;
+      Stop;
+    }
+}
+
+class WM_Laser0 : WM_PuffBase {States { Spawn: TNT1 A 0; WDO0 A 1 BRIGHT; Stop; }}
+class WM_Laser1 : WM_PuffBase {States { Spawn: TNT1 A 0; WDO1 A 1 BRIGHT; Stop; }}
+class WM_Laser2 : WM_PuffBase {States { Spawn: TNT1 A 0; WDO2 A 1 BRIGHT; Stop; }}
+class WM_Laser3 : WM_PuffBase {States { Spawn: TNT1 A 0; WDO3 A 1 BRIGHT; Stop; }}
+class WM_Laser4 : WM_PuffBase {States { Spawn: TNT1 A 0; WDO4 A 1 BRIGHT; Stop; }}
+class WM_Laser5 : WM_PuffBase {States { Spawn: TNT1 A 0; WDO5 A 1 BRIGHT; Stop; }}
+
+class WM_LaserB0 : WM_PuffBase {States { Spawn: TNT1 A 0; WDO0 B 1 BRIGHT; Stop; }}
+class WM_LaserB1 : WM_PuffBase {States { Spawn: TNT1 A 0; WDO1 B 1 BRIGHT; Stop; }}
+class WM_LaserB2 : WM_PuffBase {States { Spawn: TNT1 A 0; WDO2 B 1 BRIGHT; Stop; }}
+class WM_LaserB3 : WM_PuffBase {States { Spawn: TNT1 A 0; WDO3 B 1 BRIGHT; Stop; }}
+class WM_LaserB4 : WM_PuffBase {States { Spawn: TNT1 A 0; WDO4 B 1 BRIGHT; Stop; }}
+class WM_LaserB5 : WM_PuffBase {States { Spawn: TNT1 A 0; WDO5 B 1 BRIGHT; Stop; }}
+
+class WM_LaserG0 : WM_PuffBase {States { Spawn: TNT1 A 0; WDO0 G 1 BRIGHT; Stop; }}
+class WM_LaserG1 : WM_PuffBase {States { Spawn: TNT1 A 0; WDO1 G 1 BRIGHT; Stop; }}
+class WM_LaserG2 : WM_PuffBase {States { Spawn: TNT1 A 0; WDO2 G 1 BRIGHT; Stop; }}
+class WM_LaserG3 : WM_PuffBase {States { Spawn: TNT1 A 0; WDO3 G 1 BRIGHT; Stop; }}
+class WM_LaserG4 : WM_PuffBase {States { Spawn: TNT1 A 0; WDO4 G 1 BRIGHT; Stop; }}
+class WM_LaserG5 : WM_PuffBase {States { Spawn: TNT1 A 0; WDO5 G 1 BRIGHT; Stop; }}
+
+class WM_InvisiblePuff : WM_PuffBase {States {Spawn: TNT1 A 0; Stop;}}

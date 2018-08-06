@@ -1,0 +1,38 @@
+class WMZscriptHelper
+{
+  static void SendResultString(PlayerInfo player, string result)
+  {
+    if (!player) { return; }
+    CVar messageCVar = CVar.GetCVar("m8f_ls_ResultString", player);
+    messageCVar.SetString(result);
+  }
+
+  static void SendResultInt(PlayerInfo player, int result)
+  {
+    if (!player) { return; }
+    CVar messageCVar = CVar.GetCVar("m8f_ls_ResultInt", player);
+    messageCVar.SetInt(result);
+  }
+
+  play static void GetAimPitch(Actor activator)
+  {
+    if (!activator) { return; }
+    let player = activator.player;
+    if (!player) { return; }
+
+    double slope = activator.BulletSlope(null, ALF_PORTALRESTRICT);
+    //Console.Printf("%d", slope);
+    SendResultInt(player, slope);
+  }
+
+  play static void TargetIsPresent(Actor activator)
+  {
+    if (!activator) { return; }
+    let player = activator.player;
+    if (!player) { return; }
+
+    Actor target    = activator.AimTarget();
+    bool  isPresent = (target != null);
+    SendResultInt(player, isPresent);
+  }
+}

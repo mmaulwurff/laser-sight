@@ -1,0 +1,30 @@
+# Ignore everything
+*
+
+# Except txt, but not changelog
+!*.txt
+changelog.txt
+
+!*.md
+!*.sh
+!*.lmp
+!.gitignore
+!textures*
+*~
+
+!source
+source/*
+!source/*.acs
+
+!acs
+acs/*
+!acs/*.o
+
+!sprites
+sprites/*
+!sprites/*.png
+!sprites/*.lmp
+
+!zscript
+zscript/*
+!zscript/*.txt

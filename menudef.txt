@@ -1,0 +1,23 @@
+OptionValue "m8f_ls_LaserColorOptions"
+{
+  0, "Red"
+  1, "Green"
+  2, "Blue"
+}
+
+OptionMenu "m8f_ls_Options"
+{
+  Title "Laser Sight Options"
+
+  StaticText ""
+  Option "Show Laser Sight", "m8f_wm_ShowLaserSight", "m8f_wm_YesNo"
+  Option "Laser Sight Color", "m8f_wm_LaserColor", "m8f_wm_LaserColorOptions"
+
+  StaticText ""
+}
+
+AddOptionMenu "OptionsMenu"
+{
+  StaticText ""
+  Submenu "Laser Sight Options", "m8f_ls_Options"
+}
