@@ -22,13 +22,13 @@ script "ShowLaserSight" ENTER
   int  distanceCheckTid  = UniqueTID();
 
   int  laserColor        = GetUserCVar(playerN, "m8f_wm_LaserColor");
-  bool showLaserSight    = GetUserCVar(playerN, "m8f_wm_ShowLaserSight");
   bool targetColorChange = GetUserCVar(playerN, "m8f_wm_TSChangeLaserColor");
   bool hideOnSlot1       = GetUserCVar(playerN, "m8f_ls_HideOnSlot1");
 
   while (true)
   {
-    int updatePeriod = GetUserCVar(playerN, "m8f_ls_UpdatePeriod");
+    int updatePeriod   = GetUserCVar(playerN, "m8f_ls_UpdatePeriod");
+    int showLaserSight = GetUserCVar(playerN, "m8f_wm_ShowLaserSight");
 
     if ((updatePeriod == 0 || updateCount >= updatePeriod)
         && updatePeriod != -1)
@@ -36,7 +36,6 @@ script "ShowLaserSight" ENTER
       updateCount = 0;
 
       laserColor        = GetUserCVar(playerN, "m8f_wm_LaserColor");
-      showLaserSight    = GetUserCVar(playerN, "m8f_wm_ShowLaserSight");
       targetColorChange = GetUserCVar(playerN, "m8f_wm_TSChangeLaserColor");
       hideOnSlot1       = GetUserCVar(playerN, "m8f_ls_HideOnSlot1");
     }
@@ -118,83 +117,4 @@ function void WM_ShowLaserSight(int distanceCheckTid, int laserColor, int player
 
   LineAttack(0, angle, pitch, 0, puff, "None", MAX_DISTANCE, PUFF_FLAGS);
   //WM_FireLaser(puff);
-}
-
-// Fire Junk Section ///////////////////////////////////////////////////////////
-
-script "WM_FireJunk" (void)
-{
-  PlaySound(0, "wmenu/throw");
-  Delay(5);
-  NoiseAlert(0, 0);
-  int angle = GetActorAngle(0);
-  int pitch = GetActorPitch(0);
-  LineAttack(0, angle, pitch, 0, "WM_JunkPuff", "None", 2048.0, FHF_NOIMPACTDECAL);
-}
-
-// Game Detection Section //////////////////////////////////////////////////////
-
-function bool WM_IsDoom1(void)
-{
-  str filtered = StrParam(l:"WM_GAME");
-  bool doom1 = (StrCmp(filtered, "1") == 0);
-  return doom1;
-}
-
-function bool WM_IsDoom2(void)
-{
-  str filtered = StrParam(l:"WM_GAME");
-  bool doom2 = (StrCmp(filtered, "2") == 0);
-  return doom2;
-}
-
-function bool WM_IsFreedoom(void)
-{
-  str filtered = StrParam(l:"WM_GAME");
-  bool freedoom = (StrCmp(filtered, "3") == 0);
-  return freedoom;
-}
-
-function bool WM_IsRekkr(void)
-{
-  str  checkString = StrParam(l:"E1TEXT");
-  str  rekkrString = "You've been through war.";
-  int  rekkrLength = StrLen(rekkrString);
-  bool isRekkr     = StrICmp(rekkrString, StrLeft(checkString, rekkrLength)) == 0;
-  return isRekkr;
-}
-
-function bool WM_IsHarmony(void)
-{
-  str checkString = StrParam(l:"C1TEXT");
-  str harmString = "HEADING DOWN YOU FINALLY HAVE";
-  int harmLength = StrLen(harmString);
-  bool isHarmony = StrICmp(harmString, StrLeft(checkString, harmLength)) == 0;
-  return isHarmony;
-}
-
-function bool WM_IsEVP(void)
-{
-  bool isEVP = CheckClass("EVPBFGBall");
-  return isEVP;
-}
-
-function bool WM_IsFlakesDoom(void)
-{
-  bool isFlakesDoom = CheckClass("FKHAR");
-  return isFlakesDoom;
-}
-
-function bool WM_IsAbortM(void)
-{
-  bool isAbortM = CheckClass("AbortButton");
-  return isAbortM;
-}
-
-function bool WM_IsCyanDoom(void)
-{
-  bool isCyanDoom = CheckClass("STMinigun")
-    && CheckClass("Daedabus")
-    && CheckClass("VitalitySerum");
-  return isCyanDoom;
 }

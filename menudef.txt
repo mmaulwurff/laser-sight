@@ -24,6 +24,9 @@ OptionMenu "m8f_ls_Options"
   Option "Hide On Slot 1"    , "m8f_ls_HideOnSlot1"    , "OnOff"
 
   StaticText ""
+  Control "Toggle Laser Sight", "toggle_laser_sight"
+
+  StaticText ""
   StaticText "Cross-mod Options", "Blue"
   Option "Target Spy: change color on target", "m8f_wm_TSChangeLaserColor", "OnOff"
 
