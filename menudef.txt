@@ -21,6 +21,7 @@ OptionMenu "m8f_ls_Options"
   Option "Show Laser Sight"  , "m8f_wm_ShowLaserSight" , "OnOff"
   Option "Laser Sight Color" , "m8f_wm_LaserColor"     , "m8f_ls_LaserColorOptions"
   Option "Options Update Period", "m8f_ls_UpdatePeriod", "m8f_ls_UpdatePeriodOptions"
+  Option "Hide On Slot 1"    , "m8f_ls_HideOnSlot1"    , "OnOff"
 
   StaticText ""
   StaticText "Cross-mod Options", "Blue"

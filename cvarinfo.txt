@@ -1,10 +1,10 @@
 user string m8f_ls_ResultString;
 user int    m8f_ls_ResultInt;
 
-user int    m8f_wm_ShowLaserSight  = 0;
-user int    m8f_wm_LaserOnZoom     = 0;
-user int    m8f_wm_IsNotSlot1Melee = 0;
-user int    m8f_ls_UpdatePeriod    = 35;
+user int    m8f_wm_ShowLaserSight = 0;
+user int    m8f_wm_LaserOnZoom    = 0;
+user int    m8f_ls_HideOnSlot1    = 0;
+user int    m8f_ls_UpdatePeriod   = 35;
 
 // 0 - red
 // 1 - green

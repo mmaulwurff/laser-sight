@@ -1,5 +1,6 @@
 class m8f_ls_Helper
 {
+
   static void SendResultString(PlayerInfo player, string result)
   {
     if (!player) { return; }
@@ -35,4 +36,21 @@ class m8f_ls_Helper
     bool  isPresent = (target != null);
     SendResultInt(player, isPresent);
   }
-}
+
+  play static void IsSlot1(Actor activator)
+  {
+    if (!activator) { return; }
+    let player = activator.player;
+    if (!player) { return; }
+
+    Weapon w = player.readyWeapon;
+    if (w == null) { return SendResultInt(player, false); }
+
+    int located;
+    int slot;
+    int priority;
+    [located, slot, priority] = player.weapons.LocateWeapon(w.GetClassName());
+    SendResultInt(player, (slot == 1));
+  }
+
+} // m8f_ls_Helper

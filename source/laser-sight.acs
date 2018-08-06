@@ -7,16 +7,24 @@ function bool LS_IsTitlemap(void)
   return (StrICmp(mapLumpName, "TITLEMAP") == 0);
 }
 
+function bool LS_IsSlot1(int playerN)
+{
+  ScriptCall("m8f_ls_Helper", "IsSlot1");
+  return GetUserCVar(playerN, "m8f_ls_ResultInt");
+}
+
 script "ShowLaserSight" ENTER
 {
   if (LS_IsTitlemap()) { terminate; }
 
-  int  updateCount      = 0;
-  int  playerN          = PlayerNumber();
-  int  distanceCheckTid = UniqueTID();
-  int  laserColor       = GetUserCVar(playerN, "m8f_wm_LaserColor");
-  bool showLaserSight   = GetUserCVar(playerN, "m8f_wm_ShowLaserSight");
-  bool targetColorChange= GetUserCVar(playerN, "m8f_wm_TSChangeLaserColor");
+  int  updateCount       = 0;
+  int  playerN           = PlayerNumber();
+  int  distanceCheckTid  = UniqueTID();
+
+  int  laserColor        = GetUserCVar(playerN, "m8f_wm_LaserColor");
+  bool showLaserSight    = GetUserCVar(playerN, "m8f_wm_ShowLaserSight");
+  bool targetColorChange = GetUserCVar(playerN, "m8f_wm_TSChangeLaserColor");
+  bool hideOnSlot1       = GetUserCVar(playerN, "m8f_ls_HideOnSlot1");
 
   while (true)
   {
@@ -27,13 +35,21 @@ script "ShowLaserSight" ENTER
     {
       updateCount = 0;
 
-      laserColor     = GetUserCVar(playerN, "m8f_wm_LaserColor");
-      showLaserSight = GetUserCVar(playerN, "m8f_wm_ShowLaserSight");
+      laserColor        = GetUserCVar(playerN, "m8f_wm_LaserColor");
+      showLaserSight    = GetUserCVar(playerN, "m8f_wm_ShowLaserSight");
+      targetColorChange = GetUserCVar(playerN, "m8f_wm_TSChangeLaserColor");
+      hideOnSlot1       = GetUserCVar(playerN, "m8f_ls_HideOnSlot1");
     }
     else { ++updateCount; }
 
     if (showLaserSight)
     {
+      if (hideOnSlot1) if (LS_IsSlot1(playerN))
+      {
+        Delay(1);
+        continue;
+      }
+
       int maybeChangedLaserColor = laserColor;
       if (targetColorChange && GetUserCVar(playerN, "m8f_ts_has_target"))
       {

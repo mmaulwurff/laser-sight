@@ -14,10 +14,7 @@ zip $name.pk3 \
     zscript/*.txt \
     *.md \
     *.txt \
-    textures.blue \
-    textures.green \
-    textures.icons \
-    textures.txt \
+    textures.* \
 && \
 gzdoom -glversion 3 \
        \ #-iwad ~/Programs/Games/wads/doom/freedoom1.wad \
