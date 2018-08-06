@@ -15,6 +15,13 @@ class WM_PuffBase : Actor
     +NOTONAUTOMAP;
   }
 
+  override void PostBeginPlay()
+  {
+    double s = CVar.GetCVar("m8f_ls_Scale", players[consolePlayer]).GetFloat();
+    Scale.X  = s;
+    Scale.Y  = s;
+  }
+
   States
     {
     Spawn:
