@@ -11,33 +11,35 @@ script "ShowLaserSight" ENTER
 {
   if (LS_IsTitlemap()) { terminate; }
 
-  int  updatePeriod     = 10;
   int  updateCount      = 0;
   int  playerN          = PlayerNumber();
   int  distanceCheckTid = UniqueTID();
   int  laserColor       = GetUserCVar(playerN, "m8f_wm_LaserColor");
   bool showLaserSight   = GetUserCVar(playerN, "m8f_wm_ShowLaserSight");
+  bool targetColorChange= GetUserCVar(playerN, "m8f_wm_TSChangeLaserColor");
 
   while (true)
   {
-    if (updateCount < updatePeriod) { ++updateCount; }
-    else
+    int updatePeriod = GetUserCVar(playerN, "m8f_ls_UpdatePeriod");
+
+    if ((updatePeriod == 0 || updateCount >= updatePeriod)
+        && updatePeriod != -1)
     {
       updateCount = 0;
 
       laserColor     = GetUserCVar(playerN, "m8f_wm_LaserColor");
       showLaserSight = GetUserCVar(playerN, "m8f_wm_ShowLaserSight");
     }
+    else { ++updateCount; }
 
     if (showLaserSight)
     {
       int maybeChangedLaserColor = laserColor;
-      if (GetUserCVar(playerN, "m8f_wm_TSChangeLaserColor")
-          && GetUserCVar(playerN, "m8f_ts_has_target"))
+      if (targetColorChange && GetUserCVar(playerN, "m8f_ts_has_target"))
       {
         maybeChangedLaserColor = (laserColor + 1) % 3;
       }
-      WM_ShowLaserSight(distanceCheckTid, maybeChangedLaserColor);
+      WM_ShowLaserSight(distanceCheckTid, maybeChangedLaserColor, playerN);
     }
 
     Delay(1);
@@ -58,26 +60,24 @@ str puffs[3][N_PUFFS] =
 #define MAX_DISTANCE 4096.0
 #define PUFF_FLAGS FHF_NORANDOMPUFFZ | FHF_NOIMPACTDECAL
 
-function int WM_GetAimPitch(void)
+function int WM_GetAimPitch(int playerN)
 {
-  ScriptCall("WMZscriptHelper", "GetAimPitch");
-  int playerN = PlayerNumber();
+  ScriptCall("m8f_ls_Helper", "GetAimPitch");
   return FixedMul(GetUserCVar(playerN, "m8f_ls_ResultInt"), 180.0);
 }
 
-function bool WM_TargetIsPresent(void)
+function bool WM_TargetIsPresent(int playerN)
 {
-  ScriptCall("WMZscriptHelper", "TargetIsPresent");
-  int playerN = PlayerNumber();
+  ScriptCall("m8f_ls_Helper", "TargetIsPresent");
   return GetUserCVar(playerN, "m8f_ls_ResultInt");
 }
 
-function void WM_ShowLaserSight(int distanceCheckTid, int laserColor)
+function void WM_ShowLaserSight(int distanceCheckTid, int laserColor, int playerN)
 {
   int angle = GetActorAngle(0);
   int pitch;
-  if (WM_TargetIsPresent()) { pitch = WM_GetAimPitch(); }
-  else                      { pitch = GetActorPitch(0); }
+  if (WM_TargetIsPresent(playerN)) { pitch = WM_GetAimPitch(playerN); }
+  else                             { pitch = GetActorPitch(0); }
   LineAttack(0, angle, pitch, 0, "WM_InvisiblePuff", "None", MAX_DISTANCE,
              PUFF_FLAGS, distanceCheckTid);
 

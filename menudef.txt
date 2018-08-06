@@ -5,13 +5,26 @@ OptionValue "m8f_ls_LaserColorOptions"
   2, "Blue"
 }
 
+OptionValue "m8f_ls_UpdatePeriodOptions"
+{
+  -1, "Never"
+   0, "Immediately"
+  35, "Every second"
+ 105, "Every three seconds"
+}
+
 OptionMenu "m8f_ls_Options"
 {
   Title "Laser Sight Options"
 
   StaticText ""
-  Option "Show Laser Sight", "m8f_wm_ShowLaserSight", "m8f_wm_YesNo"
-  Option "Laser Sight Color", "m8f_wm_LaserColor", "m8f_wm_LaserColorOptions"
+  Option "Show Laser Sight"  , "m8f_wm_ShowLaserSight" , "OnOff"
+  Option "Laser Sight Color" , "m8f_wm_LaserColor"     , "m8f_ls_LaserColorOptions"
+  Option "Options Update Period", "m8f_ls_UpdatePeriod", "m8f_ls_UpdatePeriodOptions"
+
+  StaticText ""
+  StaticText "Cross-mod Options", "Blue"
+  Option "Target Spy: change color on target", "m8f_wm_TSChangeLaserColor", "OnOff"
 
   StaticText ""
 }

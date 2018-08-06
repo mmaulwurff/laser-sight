@@ -1,4 +1,4 @@
-class WMZscriptHelper
+class m8f_ls_Helper
 {
   static void SendResultString(PlayerInfo player, string result)
   {
