@@ -22,7 +22,7 @@ OptionMenu "m8f_ls_Options"
   ColorPicker "Color"        , "m8f_ls_CustomColor"
   Option "Options Update Period", "m8f_ls_UpdatePeriod", "m8f_ls_UpdatePeriodOptions"
   Option "Hide On Slot 1"    , "m8f_ls_HideOnSlot1"    , "OnOff"
-  Slider "Scale"             , "m8f_ls_Scale"          , 0.5, 5.0, 0.5, 1
+  Slider "Scale"             , "m8f_ls_Scale"          , 0.5, 5.0, 0.1, 1
 
   StaticText ""
   Control "Toggle Laser Sight", "toggle_laser_sight"
