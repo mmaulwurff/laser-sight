@@ -19,7 +19,7 @@ OptionMenu "m8f_ls_Options"
 
   StaticText ""
   Option "Show Laser Sight"  , "m8f_wm_ShowLaserSight" , "OnOff"
-  Option "Laser Sight Color" , "m8f_wm_LaserColor"     , "m8f_ls_LaserColorOptions"
+  ColorPicker "Color"        , "m8f_ls_CustomColor"
   Option "Options Update Period", "m8f_ls_UpdatePeriod", "m8f_ls_UpdatePeriodOptions"
   Option "Hide On Slot 1"    , "m8f_ls_HideOnSlot1"    , "OnOff"
   Slider "Scale"             , "m8f_ls_Scale"          , 0.5, 5.0, 0.5, 1
@@ -30,6 +30,7 @@ OptionMenu "m8f_ls_Options"
   StaticText ""
   StaticText "Cross-mod Options", "Blue"
   Option "Target Spy: change color on target", "m8f_wm_TSChangeLaserColor", "OnOff"
+  ColorPicker "Color on Target" , "m8f_ls_ColorOnTarget"
 
   StaticText ""
 }

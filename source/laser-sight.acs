@@ -21,7 +21,6 @@ script "ShowLaserSight" ENTER
   int  playerN           = PlayerNumber();
   int  distanceCheckTid  = UniqueTID();
 
-  int  laserColor        = GetUserCVar(playerN, "m8f_wm_LaserColor");
   bool targetColorChange = GetUserCVar(playerN, "m8f_wm_TSChangeLaserColor");
   bool hideOnSlot1       = GetUserCVar(playerN, "m8f_ls_HideOnSlot1");
 
@@ -35,7 +34,6 @@ script "ShowLaserSight" ENTER
     {
       updateCount = 0;
 
-      laserColor        = GetUserCVar(playerN, "m8f_wm_LaserColor");
       targetColorChange = GetUserCVar(playerN, "m8f_wm_TSChangeLaserColor");
       hideOnSlot1       = GetUserCVar(playerN, "m8f_ls_HideOnSlot1");
     }
@@ -49,12 +47,10 @@ script "ShowLaserSight" ENTER
         continue;
       }
 
-      int maybeChangedLaserColor = laserColor;
-      if (targetColorChange && GetUserCVar(playerN, "m8f_ts_has_target"))
-      {
-        maybeChangedLaserColor = (laserColor + 1) % 3;
-      }
-      WM_ShowLaserSight(distanceCheckTid, maybeChangedLaserColor, playerN);
+      bool negative =
+        (targetColorChange && GetUserCVar(playerN, "m8f_ts_has_target"));
+
+      WM_ShowLaserSight(distanceCheckTid, negative, playerN);
     }
 
     Delay(1);
@@ -67,9 +63,8 @@ script "ShowLaserSight" ENTER
 
 str puffs[3][N_PUFFS] =
 {
-  { "WM_Laser5", "WM_Laser0", "WM_Laser1", "WM_Laser2", "WM_Laser3", "WM_Laser4" },
-  { "WM_LaserG5", "WM_LaserG0", "WM_LaserG1", "WM_LaserG2", "WM_LaserG3", "WM_LaserG4"},
-  { "WM_LaserB5", "WM_LaserB0", "WM_LaserB1", "WM_LaserB2", "WM_LaserB3", "WM_LaserB4"},
+  { "m8f_ls_LaserP5", "m8f_ls_LaserP0", "m8f_ls_LaserP1", "m8f_ls_LaserP2", "m8f_ls_LaserP3", "m8f_ls_LaserP4" },
+  { "m8f_ls_LaserN5", "m8f_ls_LaserN0", "m8f_ls_LaserN1", "m8f_ls_LaserN2", "m8f_ls_LaserN3", "m8f_ls_LaserN4" },
 };
 
 #define MAX_DISTANCE 4096.0
@@ -87,13 +82,13 @@ function bool WM_TargetIsPresent(int playerN)
   return GetUserCVar(playerN, "m8f_ls_ResultInt");
 }
 
-function void WM_ShowLaserSight(int distanceCheckTid, int laserColor, int playerN)
+function void WM_ShowLaserSight(int distanceCheckTid, bool negative, int playerN)
 {
   int angle = GetActorAngle(0);
   int pitch;
   if (WM_TargetIsPresent(playerN)) { pitch = WM_GetAimPitch(playerN); }
   else                             { pitch = GetActorPitch(0); }
-  LineAttack(0, angle, pitch, 0, "WM_InvisiblePuff", "None", MAX_DISTANCE,
+  LineAttack(0, angle, pitch, 0, "m8f_ls_InvisiblePuff", "None", MAX_DISTANCE,
              PUFF_FLAGS, distanceCheckTid);
 
   int distance = VectorLength(GetActorX(distanceCheckTid) - GetActorX(0),
@@ -108,7 +103,7 @@ function void WM_ShowLaserSight(int distanceCheckTid, int laserColor, int player
   else if (distance < 104857600) { iPuff = 4; }
   else                           { iPuff = 5; }
 
-  str puff = puffs[laserColor][iPuff];
+  str puff = puffs[negative][iPuff];
 
   /*
   Log(i:distance);

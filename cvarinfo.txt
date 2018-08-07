@@ -5,10 +5,6 @@ user int    m8f_wm_ShowLaserSight = 0;
 user int    m8f_ls_HideOnSlot1    = 0;
 user int    m8f_ls_UpdatePeriod   = 35;
 user float  m8f_ls_Scale          = 1.0;
-
-// 0 - red
-// 1 - green
-// 2 - blue
-user int  m8f_wm_LaserColor = 0;
-
-user bool m8f_wm_TSChangeLaserColor = false;
+user color  m8f_ls_CustomColor    = "FF 00 00";
+user bool   m8f_wm_TSChangeLaserColor = false;
+user color  m8f_ls_ColorOnTarget  = "OO FF FF";

@@ -19,11 +19,9 @@ zip $name.pk3 \
     acs/$name.o \
     source/*.acs \
     sprites/*.png \
-    sprites/*.lmp \
     zscript/*.txt \
     *.md \
     *.txt \
-    textures.* \
 && \
 cp $name.pk3 $name-$(git describe --abbrev=0 --tags).pk3 \
 && \
