@@ -2,7 +2,6 @@ user string m8f_ls_ResultString;
 user int    m8f_ls_ResultInt;
 
 user int    m8f_wm_ShowLaserSight = 0;
-user int    m8f_wm_LaserOnZoom    = 0;
 user int    m8f_ls_HideOnSlot1    = 0;
 user int    m8f_ls_UpdatePeriod   = 35;
 user float  m8f_ls_Scale          = 1.0;
@@ -12,5 +11,4 @@ user float  m8f_ls_Scale          = 1.0;
 // 2 - blue
 user int  m8f_wm_LaserColor = 0;
 
-user bool m8f_wm_TargetSpyOnZoom    = false;
 user bool m8f_wm_TSChangeLaserColor = false;
