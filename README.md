@@ -14,4 +14,5 @@
 
 ## Copying
 Author: m8f
+
 License: GPLv3 (see copying.txt)
