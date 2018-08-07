@@ -1,7 +1,8 @@
 # Standalone Laser Sight for GZDoom
 
-[https://forum.zdoom.org/viewtopic.php?f=43&t=61079#p1060800](Forum Topic)
-[https://github.com/mmaulwurff/laser-sight](Git Repository)
+[Forum Topic](https://forum.zdoom.org/viewtopic.php?f=43&t=61079#p1060800)
+
+[Git Repository](https://github.com/mmaulwurff/laser-sight)
 
 ## Features
 - visible on all distances
