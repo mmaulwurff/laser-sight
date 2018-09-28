@@ -1,0 +1,131 @@
+//-----------------------------------------------------------------------------
+//
+// Copyright 2018 mmaulwurff (Alexander Kromm)
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see http://www.gnu.org/licenses/
+//
+//-----------------------------------------------------------------------------
+
+class m8f_ls_EventHandler : EventHandler
+{
+
+  // attributes section ////////////////////////////////////////////////////////
+
+  private bool            _isTitlemap;
+  private bool            _isInitialized;
+  private m8f_ls_Settings _settings;
+  private PlayerInfo      _player;
+  private Actor           _puff;
+
+  // overrides section /////////////////////////////////////////////////////////
+
+  override void OnRegister()
+  {
+    _isInitialized = false;
+  }
+
+  override void WorldLoaded(WorldEvent event)
+  {
+    _isTitlemap = CheckTitlemap();
+  }
+
+  override void PlayerEntered(PlayerEvent event)
+  {
+    if (event.playerNumber != consolePlayer) { return; }
+
+    _player        = players[consolePlayer];
+    _settings      = new("m8f_ls_Settings").init(_player);
+    _puff          = Actor.Spawn("m8f_ls_LaserPuff");
+    _isInitialized = true;
+
+    _puff.bInvisible = true;
+  }
+
+  override void WorldTick()
+  {
+    if (_isTitlemap)     { return; }
+    if (!_isInitialized) { return; }
+
+    _puff.bInvisible = true;
+
+    _settings.maybeUpdate(_player);
+
+    if (_settings.hideOnSlot1 && IsSlot1(_player)) { return; }
+
+    bool showLaserSight = CVar.GetCVar("m8f_wm_ShowLaserSight", _player).GetInt();
+    if (!showLaserSight) { return; }
+
+    if (_player.readyWeapon == null) { return; }
+
+    CVar hasTargetCVar = CVar.GetCVar("m8f_ts_has_target", _player);
+    bool hasTarget     = (hasTargetCVar != null && hasTargetCVar.GetInt());
+    bool negative      = (_settings.targetColorChange && hasTarget);
+
+    ShowLaserSight(negative, _player);
+  }
+
+  // methods section ///////////////////////////////////////////////////////////
+
+  void ShowLaserSight(bool negative, PlayerInfo player)
+  {
+    int    lineAttackFlags = LAF_NOIMPACTDECAL | LAF_NORANDOMPUFFZ;
+    Actor  a               = player.mo;
+    double pitch           = a.AimTarget()
+      ? a.BulletSlope(null, ALF_PORTALRESTRICT)
+      : a.pitch;
+
+    Actor  tempPuff;
+    int    i;
+    [tempPuff, i] = a.LineAttack( a.angle
+                                , 4000.0
+                                , pitch
+                                , 0
+                                , "none"
+                                , "m8f_ls_InvisiblePuff"
+                                , lineAttackFlags
+                                );
+
+    double distance = a.Distance3D(tempPuff);
+    double scale    = _settings.scale * distance / 250.0;
+
+    _puff.SetShade(negative ? _settings.targetColor : _settings.noTargetColor);
+    _puff.scale.x    = scale;
+    _puff.scale.y    = scale;
+    _puff.bInvisible = false;
+    _puff.SetOrigin(tempPuff.pos, true);
+  }
+
+  // static functions section //////////////////////////////////////////////////
+
+  play static bool IsSlot1(PlayerInfo player)
+  {
+    Weapon w = player.readyWeapon;
+    if (w == null) { return false; }
+
+    int located;
+    int slot;
+    int priority;
+    [located, slot, priority] = player.weapons.LocateWeapon(w.GetClassName());
+
+    bool slot1 = (slot == 1);
+    return slot1;
+  }
+
+  static bool CheckTitlemap()
+  {
+    bool isTitlemap = (level.mapname == "TITLEMAP");
+    return isTitlemap;
+  }
+
+} // class m8f_ls_EventHandler

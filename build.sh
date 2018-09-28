@@ -2,8 +2,6 @@
 
 name=laser-sight
 
-acc source/$name.acs acs/$name.o \
-&& \
 rm -f $name.pk3 \
 && \
 git log --date=short --pretty=format:"-%d %ad %s%n" | \
@@ -16,8 +14,6 @@ git log --date=short --pretty=format:"-%d %ad %s%n" | \
     > changelog.txt \
 && \
 zip $name.pk3 \
-    acs/$name.o \
-    source/*.acs \
     sprites/*.png \
     zscript/*.txt \
     *.md \

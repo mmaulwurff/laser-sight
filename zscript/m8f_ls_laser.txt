@@ -20,11 +20,14 @@
 
 class m8f_ls_PuffBase : Actor
 {
+
   Default
   {
-    Mass 0;
-    Radius 1;
-    Height 2;
+    Mass        0;
+    Radius      1;
+    Height      2;
+    RenderStyle "Stencil";
+
     +NOBLOCKMAP;
     +NOGRAVITY;
     +BLOODLESSIMPACT;
@@ -33,58 +36,17 @@ class m8f_ls_PuffBase : Actor
     +NOTRIGGER;
     +FORCEXYBILLBOARD;
     +NOTONAUTOMAP;
-    RenderStyle "Stencil";
   }
 
   States
-    {
+  {
     Spawn:
       TNT1 A 0;
       WDOB A 1 BRIGHT;
       Stop;
-    }
-}
-
-class m8f_ls_PuffPositive : m8f_ls_PuffBase
-{
-  override void PostBeginPlay()
-  {
-    PlayerInfo player = players[consolePlayer];
-    string c = CVar.GetCVar("m8f_ls_CustomColor", player).GetString();
-    double s = CVar.GetCVar("m8f_ls_Scale", player).GetFloat();
-
-    SetShade(c);
-    Scale.X  = s;
-    Scale.Y  = s;
   }
-}
 
-class m8f_ls_PuffNegative : m8f_ls_PuffBase
-{
-  override void PostBeginPlay()
-  {
-    PlayerInfo player = players[consolePlayer];
-    string c = CVar.GetCVar("m8f_ls_ColorOnTarget", player).GetString();
-    double s = CVar.GetCVar("m8f_ls_Scale", player).GetFloat();
-
-    SetShade(c);
-    Scale.X  = s;
-    Scale.Y  = s;
-  }
-}
-
-class m8f_ls_LaserP0 : m8f_ls_PuffPositive {States { Spawn: TNT1 A 0; WDO0 A 1 BRIGHT; Stop; }}
-class m8f_ls_LaserP1 : m8f_ls_PuffPositive {States { Spawn: TNT1 A 0; WDO1 A 1 BRIGHT; Stop; }}
-class m8f_ls_LaserP2 : m8f_ls_PuffPositive {States { Spawn: TNT1 A 0; WDO2 A 1 BRIGHT; Stop; }}
-class m8f_ls_LaserP3 : m8f_ls_PuffPositive {States { Spawn: TNT1 A 0; WDO3 A 1 BRIGHT; Stop; }}
-class m8f_ls_LaserP4 : m8f_ls_PuffPositive {States { Spawn: TNT1 A 0; WDO4 A 1 BRIGHT; Stop; }}
-class m8f_ls_LaserP5 : m8f_ls_PuffPositive {States { Spawn: TNT1 A 0; WDO5 A 1 BRIGHT; Stop; }}
-
-class m8f_ls_LaserN0 : m8f_ls_PuffNegative {States { Spawn: TNT1 A 0; WDO0 A 1 BRIGHT; Stop; }}
-class m8f_ls_LaserN1 : m8f_ls_PuffNegative {States { Spawn: TNT1 A 0; WDO1 A 1 BRIGHT; Stop; }}
-class m8f_ls_LaserN2 : m8f_ls_PuffNegative {States { Spawn: TNT1 A 0; WDO2 A 1 BRIGHT; Stop; }}
-class m8f_ls_LaserN3 : m8f_ls_PuffNegative {States { Spawn: TNT1 A 0; WDO3 A 1 BRIGHT; Stop; }}
-class m8f_ls_LaserN4 : m8f_ls_PuffNegative {States { Spawn: TNT1 A 0; WDO4 A 1 BRIGHT; Stop; }}
-class m8f_ls_LaserN5 : m8f_ls_PuffNegative {States { Spawn: TNT1 A 0; WDO5 A 1 BRIGHT; Stop; }}
+} // class m8f_ls_PuffBase
 
 class m8f_ls_InvisiblePuff : m8f_ls_PuffBase {States {Spawn: TNT1 A 0; Stop;}}
+class m8f_ls_LaserPuff     : m8f_ls_PuffBase {States {Spawn: TNT1 A 0; WDO1 A -1 BRIGHT; Stop;}}
