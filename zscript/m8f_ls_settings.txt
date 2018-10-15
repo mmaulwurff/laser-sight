@@ -27,7 +27,7 @@ class m8f_ls_Settings
   string targetColor;
   double scale;
 
-  void read(PlayerInfo player)
+  private void read(PlayerInfo player)
   {
     targetColorChange = CVar.GetCVar("m8f_wm_TSChangeLaserColor" , player).GetInt();
     hideOnSlot1       = CVar.GetCVar("m8f_ls_HideOnSlot1"        , player).GetInt();

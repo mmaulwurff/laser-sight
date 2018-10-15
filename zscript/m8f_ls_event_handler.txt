@@ -77,7 +77,7 @@ class m8f_ls_EventHandler : EventHandler
 
   // methods section ///////////////////////////////////////////////////////////
 
-  void ShowLaserSight(bool negative, PlayerInfo player)
+  private void ShowLaserSight(bool negative, PlayerInfo player)
   {
     int    lineAttackFlags = LAF_NOIMPACTDECAL | LAF_NORANDOMPUFFZ;
     Actor  a               = player.mo;
@@ -110,7 +110,7 @@ class m8f_ls_EventHandler : EventHandler
 
   // static functions section //////////////////////////////////////////////////
 
-  play static bool IsSlot1(PlayerInfo player)
+  private play static bool IsSlot1(PlayerInfo player)
   {
     Weapon w = player.readyWeapon;
     if (w == null) { return false; }
@@ -124,7 +124,7 @@ class m8f_ls_EventHandler : EventHandler
     return slot1;
   }
 
-  static bool CheckTitlemap()
+  private static bool CheckTitlemap()
   {
     bool isTitlemap = (level.mapname == "TITLEMAP");
     return isTitlemap;
