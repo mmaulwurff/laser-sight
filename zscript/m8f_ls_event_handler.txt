@@ -96,6 +96,8 @@ class m8f_ls_EventHandler : EventHandler
                                 , lineAttackFlags
                                 );
 
+    if (tempPuff == null) { return; }
+
     double distance = a.Distance3D(tempPuff);
     double scale    = _settings.scale * distance / 250.0;
 
