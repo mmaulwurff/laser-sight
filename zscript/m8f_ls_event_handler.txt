@@ -40,22 +40,13 @@ class m8f_ls_EventHandler : EventHandler
     _isTitlemap = CheckTitlemap();
   }
 
-  override void PlayerEntered(PlayerEvent event)
-  {
-    if (event.playerNumber != consolePlayer) { return; }
-
-    _player        = players[consolePlayer];
-    _settings      = new("m8f_ls_Settings").init(_player);
-    _puff          = Actor.Spawn("m8f_ls_LaserPuff");
-    _isInitialized = true;
-
-    _puff.bInvisible = true;
-  }
-
   override void WorldTick()
   {
-    if (_isTitlemap)     { return; }
-    if (!_isInitialized) { return; }
+    if (_isTitlemap) { return; }
+
+    if (!_isInitialized) { SetupPuff(players[consolePlayer]); }
+
+    if (!_puff) { return; }
 
     _puff.bInvisible = true;
 
@@ -76,6 +67,32 @@ class m8f_ls_EventHandler : EventHandler
   }
 
   // methods section ///////////////////////////////////////////////////////////
+
+  private void SetupPuff(PlayerInfo player)
+  {
+    if (player == null) { return; }
+
+    // clear existing laser points
+    Array<Actor> deleteList;
+    let iterator = ThinkerIterator.Create("m8f_ls_LaserPuff");
+    Actor toDelete;
+    while (toDelete = Actor(iterator.next(true)))
+    {
+      deleteList.push(toDelete);
+    }
+    int size = deleteList.size();
+    for (int i = 0; i < size; ++i)
+    {
+      deleteList[i].Destroy();
+    }
+
+    _player        = players[consolePlayer];
+    _settings      = new("m8f_ls_Settings").init(_player);
+    _puff          = Actor.Spawn("m8f_ls_LaserPuff");
+    _isInitialized = true;
+
+    _puff.bInvisible = true;
+  }
 
   private void ShowLaserSight(bool negative, PlayerInfo player)
   {
