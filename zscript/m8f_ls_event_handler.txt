@@ -59,11 +59,15 @@ class m8f_ls_EventHandler : EventHandler
 
     if (_player.readyWeapon == null) { return; }
 
-    CVar hasTargetCVar = CVar.GetCVar("m8f_ts_has_target", _player);
-    bool hasTarget     = (hasTargetCVar != null && hasTargetCVar.GetInt());
-    bool negative      = (_settings.targetColorChange && hasTarget);
+    CVar targetCVar       = CVar.GetCVar("m8f_ts_has_target", _player);
+    CVar friendlyCVar     = CVar.GetCVar("m8f_ts_friendly_target", _player);
+    bool hasTarget        = (targetCVar   != null && targetCVar.GetInt());
+    bool isTargetFriendly = (friendlyCVar != null && friendlyCVar.GetInt());
 
-    ShowLaserSight(negative, _player);
+    bool negative      = (_settings.targetColorChange   && hasTarget);
+    bool friendly      = (_settings.friendlyColorChange && isTargetFriendly);
+
+    ShowLaserSight(negative, friendly, _player);
   }
 
   // methods section ///////////////////////////////////////////////////////////
@@ -94,7 +98,7 @@ class m8f_ls_EventHandler : EventHandler
     _puff.bInvisible = true;
   }
 
-  private void ShowLaserSight(bool negative, PlayerInfo player)
+  private void ShowLaserSight(bool negative, bool friendly, PlayerInfo player)
   {
     int    lineAttackFlags = LAF_NOIMPACTDECAL | LAF_NORANDOMPUFFZ;
     Actor  a               = player.mo;
@@ -118,7 +122,12 @@ class m8f_ls_EventHandler : EventHandler
     double distance = a.Distance3D(tempPuff);
     double scale    = _settings.scale * distance / 250.0;
 
-    _puff.SetShade(negative ? _settings.targetColor : _settings.noTargetColor);
+    string shade;
+    if (friendly)      { shade = _settings.friendlyColor; }
+    else if (negative) { shade = _settings.targetColor;   }
+    else               { shade = _settings.noTargetColor; }
+
+    _puff.SetShade(shade);
     _puff.scale.x    = scale;
     _puff.scale.y    = scale;
     _puff.bInvisible = false;

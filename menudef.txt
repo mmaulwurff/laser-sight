@@ -28,9 +28,14 @@ OptionMenu "m8f_ls_Options"
   Control "Toggle Laser Sight", "toggle_laser_sight"
 
   StaticText ""
-  StaticText "Cross-mod Options", "Blue"
-  Option "Target Spy: change color on target", "m8f_wm_TSChangeLaserColor", "OnOff"
-  ColorPicker "Color on Target" , "m8f_ls_ColorOnTarget"
+  StaticText "Target Spy Cross-mod Options", "Blue"
+
+  Option "Change color on target" , "m8f_wm_TSChangeLaserColor", "OnOff"
+  ColorPicker "Color on target"   , "m8f_ls_ColorOnTarget"
+
+  StaticText ""
+  Option "Change color on friendly target" , "m8f_ls_TSChangeColorFriendly", "OnOff"
+  ColorPicker "Color on friendly target"   , "m8f_ls_FriendlyColor"
 
   StaticText ""
 }

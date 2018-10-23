@@ -22,17 +22,27 @@ class m8f_ls_Settings
 {
 
   bool   targetColorChange;
+  bool   friendlyColorChange;
+
   bool   hideOnSlot1;
+
   string noTargetColor;
   string targetColor;
+  string friendlyColor;
+
   double scale;
 
   private void read(PlayerInfo player)
   {
-    targetColorChange = CVar.GetCVar("m8f_wm_TSChangeLaserColor" , player).GetInt();
+    targetColorChange   = CVar.GetCVar("m8f_wm_TSChangeLaserColor"    , player).GetInt();
+    friendlyColorChange = CVar.GetCVar("m8f_ls_TSChangeColorFriendly" , player).GetInt();
+
     hideOnSlot1       = CVar.GetCVar("m8f_ls_HideOnSlot1"        , player).GetInt();
+
     noTargetColor     = CVar.GetCVar("m8f_ls_CustomColor"        , player).GetString();
     targetColor       = CVar.GetCVar("m8f_ls_ColorOnTarget"      , player).GetString();
+    friendlyColor     = CVar.GetCVar("m8f_ls_FriendlyColor"      , player).GetString();
+
     scale             = CVar.GetCVar("m8f_ls_Scale"              , player).GetFloat();
   }
 
@@ -53,7 +63,6 @@ class m8f_ls_Settings
     {
       read(player);
     }
-
   }
 
 } // class m8f_ls_Settings
