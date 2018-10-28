@@ -31,6 +31,7 @@ class m8f_ls_Settings
   string friendlyColor;
 
   double scale;
+  double opacity;
 
   private void read(PlayerInfo player)
   {
@@ -44,6 +45,7 @@ class m8f_ls_Settings
     friendlyColor     = CVar.GetCVar("m8f_ls_FriendlyColor"      , player).GetString();
 
     scale             = CVar.GetCVar("m8f_ls_Scale"              , player).GetFloat();
+    opacity           = CVar.GetCVar("m8f_ls_Opacity"            , player).GetFloat();
   }
 
   m8f_ls_Settings init(PlayerInfo player)

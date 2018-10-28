@@ -121,6 +121,7 @@ class m8f_ls_EventHandler : EventHandler
 
     double distance = a.Distance3D(tempPuff);
     double scale    = _settings.scale * distance / 250.0;
+    double opacity  = _settings.opacity;
 
     string shade;
     if (friendly)      { shade = _settings.friendlyColor; }
@@ -131,6 +132,7 @@ class m8f_ls_EventHandler : EventHandler
     _puff.scale.x    = scale;
     _puff.scale.y    = scale;
     _puff.bInvisible = false;
+    _puff.alpha      = opacity;
     _puff.SetOrigin(tempPuff.pos, true);
   }
 

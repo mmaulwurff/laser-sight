@@ -13,35 +13,42 @@ OptionValue "m8f_ls_UpdatePeriodOptions"
  105, "Every three seconds"
 }
 
-OptionMenu "m8f_ls_Options"
+OptionMenu    "m8f_ls_Options"
 {
-  Title "Laser Sight Options"
+  Title       "Laser Sight Options"
 
-  StaticText ""
-  Option "Show Laser Sight"  , "m8f_wm_ShowLaserSight" , "OnOff"
-  ColorPicker "Color"        , "m8f_ls_CustomColor"
-  Option "Options Update Period", "m8f_ls_UpdatePeriod", "m8f_ls_UpdatePeriodOptions"
-  Option "Hide On Slot 1"    , "m8f_ls_HideOnSlot1"    , "OnOff"
-  Slider "Scale"             , "m8f_ls_Scale"          , 0.2, 5.0, 0.1, 1
+  StaticText  ""
+  StaticText  "Settings", "Blue"
+  Option      "Show Laser Sight"  , "m8f_wm_ShowLaserSight" , "OnOff"
+  Option      "Options Update Period", "m8f_ls_UpdatePeriod", "m8f_ls_UpdatePeriodOptions"
 
-  StaticText ""
-  Control "Toggle Laser Sight", "toggle_laser_sight"
+  StaticText  ""
+  ColorPicker "Color"             , "m8f_ls_CustomColor"
+  Option      "Hide On Slot 1"    , "m8f_ls_HideOnSlot1"    , "OnOff"
 
-  StaticText ""
-  StaticText "Target Spy Cross-mod Options", "Blue"
+  StaticText  ""
+  Slider      "Scale"             , "m8f_ls_Scale"          , 0.2, 5.0, 0.1, 1
+  Slider      "Opacity"           , "m8f_ls_Opacity"        , 0.0, 1.0, 0.05, 2
 
-  Option "Change color on target" , "m8f_wm_TSChangeLaserColor", "OnOff"
+  StaticText  ""
+  StaticText  "Commands", "Blue"
+  Control     "Toggle Laser Sight", "toggle_laser_sight"
+
+  StaticText  ""
+  StaticText  "Target Spy Cross-mod Options", "Blue"
+
+  Option      "Change color on target" , "m8f_wm_TSChangeLaserColor", "OnOff"
   ColorPicker "Color on target"   , "m8f_ls_ColorOnTarget"
 
-  StaticText ""
-  Option "Change color on friendly target" , "m8f_ls_TSChangeColorFriendly", "OnOff"
+  StaticText  ""
+  Option      "Change color on friendly target" , "m8f_ls_TSChangeColorFriendly", "OnOff"
   ColorPicker "Color on friendly target"   , "m8f_ls_FriendlyColor"
 
-  StaticText ""
+  StaticText  ""
 }
 
 AddOptionMenu "OptionsMenu"
 {
   StaticText ""
-  Submenu "Laser Sight Options", "m8f_ls_Options"
+  Submenu    "Laser Sight Options", "m8f_ls_Options"
 }
