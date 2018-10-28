@@ -25,6 +25,7 @@ class m8f_ls_Settings
   bool   friendlyColorChange;
 
   bool   hideOnSlot1;
+  bool   hideOnCloseDistance;
 
   string noTargetColor;
   string targetColor;
@@ -38,7 +39,8 @@ class m8f_ls_Settings
     targetColorChange   = CVar.GetCVar("m8f_wm_TSChangeLaserColor"    , player).GetInt();
     friendlyColorChange = CVar.GetCVar("m8f_ls_TSChangeColorFriendly" , player).GetInt();
 
-    hideOnSlot1       = CVar.GetCVar("m8f_ls_HideOnSlot1"        , player).GetInt();
+    hideOnSlot1         = CVar.GetCVar("m8f_ls_HideOnSlot1"           , player).GetInt();
+    hideOnCloseDistance = CVar.GetCVar("m8f_ls_hide_close"            , player).GetInt();
 
     noTargetColor     = CVar.GetCVar("m8f_ls_CustomColor"        , player).GetString();
     targetColor       = CVar.GetCVar("m8f_ls_ColorOnTarget"      , player).GetString();

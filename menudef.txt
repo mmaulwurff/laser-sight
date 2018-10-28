@@ -1,10 +1,3 @@
-OptionValue "m8f_ls_LaserColorOptions"
-{
-  0, "Red"
-  1, "Green"
-  2, "Blue"
-}
-
 OptionValue "m8f_ls_UpdatePeriodOptions"
 {
   -1, "Never"
@@ -25,6 +18,7 @@ OptionMenu    "m8f_ls_Options"
   StaticText  ""
   ColorPicker "Color"             , "m8f_ls_CustomColor"
   Option      "Hide On Slot 1"    , "m8f_ls_HideOnSlot1"    , "OnOff"
+  Option      "Hide On Small Distance", "m8f_ls_hide_close" , "OnOff"
 
   StaticText  ""
   Slider      "Scale"             , "m8f_ls_Scale"          , 0.2, 5.0, 0.1, 1

@@ -120,6 +120,8 @@ class m8f_ls_EventHandler : EventHandler
     if (tempPuff == null) { return; }
 
     double distance = a.Distance3D(tempPuff);
+    if (_settings.hideOnCloseDistance && distance < minDistance) { return; }
+
     double scale    = _settings.scale * distance / 250.0;
     double opacity  = _settings.opacity;
 
@@ -157,5 +159,9 @@ class m8f_ls_EventHandler : EventHandler
     bool isTitlemap = (level.mapname == "TITLEMAP");
     return isTitlemap;
   }
+
+  // constants section /////////////////////////////////////////////////////////
+
+  const minDistance = 50.0;
 
 } // class m8f_ls_EventHandler
