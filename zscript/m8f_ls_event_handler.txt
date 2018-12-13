@@ -100,30 +100,24 @@ class m8f_ls_EventHandler : EventHandler
 
   private void ShowLaserSight(bool negative, bool friendly, PlayerInfo player)
   {
-    int    lineAttackFlags = LAF_NOIMPACTDECAL | LAF_NORANDOMPUFFZ;
-    Actor  a               = player.mo;
-    double pitch           = a.AimTarget()
-      ? a.BulletSlope(null, ALF_PORTALRESTRICT)
-      : a.pitch;
-
-    Actor  tempPuff;
-    int    i;
-    [tempPuff, i] = a.LineAttack( a.angle
-                                , 4000.0
-                                , pitch
-                                , 0
-                                , "none"
-                                , "m8f_ls_InvisiblePuff"
-                                , lineAttackFlags
-                                );
+    Actor  a        = player.mo;
+    double pitch    = a.AimTarget() ? a.BulletSlope(null, ALF_PORTALRESTRICT) : a.pitch;
+    Actor  tempPuff = a.LineAttack( a.angle
+                                  , 4000.0
+                                  , pitch
+                                  , 0
+                                  , "none"
+                                  , "m8f_ls_InvisiblePuff"
+                                  , lFlags
+                                  );
 
     if (tempPuff == null) { return; }
 
     double distance = a.Distance3D(tempPuff);
     if (_settings.hideOnCloseDistance && distance < minDistance) { return; }
 
-    double scale    = _settings.scale * distance / 250.0;
-    double opacity  = _settings.opacity;
+    double scale   = _settings.scale * distance / 250.0;
+    double opacity = _settings.opacity;
 
     string shade;
     if (friendly)      { shade = _settings.friendlyColor; }
@@ -147,8 +141,7 @@ class m8f_ls_EventHandler : EventHandler
 
     int located;
     int slot;
-    int priority;
-    [located, slot, priority] = player.weapons.LocateWeapon(w.GetClassName());
+    [located, slot] = player.weapons.LocateWeapon(w.GetClassName());
 
     bool slot1 = (slot == 1);
     return slot1;
@@ -163,5 +156,6 @@ class m8f_ls_EventHandler : EventHandler
   // constants section /////////////////////////////////////////////////////////
 
   const minDistance = 50.0;
+  const lFlags      = LAF_NOIMPACTDECAL | LAF_NORANDOMPUFFZ;
 
 } // class m8f_ls_EventHandler
