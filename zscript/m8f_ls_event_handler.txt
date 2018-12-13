@@ -64,8 +64,8 @@ class m8f_ls_EventHandler : EventHandler
     bool hasTarget        = (targetCVar   != null && targetCVar.GetInt());
     bool isTargetFriendly = (friendlyCVar != null && friendlyCVar.GetInt());
 
-    bool negative      = (_settings.targetColorChange   && hasTarget);
-    bool friendly      = (_settings.friendlyColorChange && isTargetFriendly);
+    bool negative = (_settings.targetColorChange   && hasTarget);
+    bool friendly = (_settings.friendlyColorChange && isTargetFriendly);
 
     ShowLaserSight(negative, friendly, _player);
   }
