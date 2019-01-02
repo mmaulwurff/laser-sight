@@ -100,7 +100,9 @@ class m8f_ls_EventHandler : EventHandler
 
   private void ShowLaserSight(bool negative, bool friendly, PlayerInfo player)
   {
-    Actor  a        = player.mo;
+    Actor a = player.mo;
+    if (a == null) { return; }
+
     double pitch    = a.AimTarget() ? a.BulletSlope(null, ALF_PORTALRESTRICT) : a.pitch;
     Actor  tempPuff = a.LineAttack( a.angle
                                   , 4000.0
@@ -130,6 +132,39 @@ class m8f_ls_EventHandler : EventHandler
     _puff.bInvisible = false;
     _puff.alpha      = opacity;
     _puff.SetOrigin(tempPuff.pos, true);
+
+    if (_settings.beamEnabled)
+    {
+      showBeam(a, tempPuff.pos, distance, shade);
+    }
+  }
+
+  private void showBeam(Actor a, vector3 targetPos, double distance, string shade)
+  {
+    color   beamColor = shade;
+    double  size      = 2.0 * _settings.scale;
+    double  cameraZ   = a.player.mo.attackZOffset + a.height / 2 - (a.player.viewHeight - a.player.viewZ);
+    vector3 relPos    = targetPos - a.pos;
+    relPos.z -= cameraZ;
+    int     nSteps    = distance / beamStep;
+    double  xStep     = relPos.x / nSteps;
+    double  yStep     = relPos.y / nSteps;
+    double  zStep     = relPos.z / nSteps;
+    double  alpha     = _settings.opacity;
+    int     drawSteps = nSteps - 2;
+
+    for (int i = 1; i < drawSteps; ++i)
+    {
+      double xoff = xStep * i;
+      double yoff = yStep * i;
+      double zoff = zStep * i + cameraZ;
+
+      a.A_SpawnParticle( beamColor, beamFlags, beamLifetime, size, beamAngle
+                       , xoff, yoff, zoff
+                       , beamVel, beamVel, beamVel, beamAcc, beamAcc, beamAcc
+                       , alpha
+                       );
+    }
   }
 
   // static functions section //////////////////////////////////////////////////
@@ -157,5 +192,12 @@ class m8f_ls_EventHandler : EventHandler
 
   const minDistance = 50.0;
   const lFlags      = LAF_NOIMPACTDECAL | LAF_NORANDOMPUFFZ;
+
+  const beamLifetime = 1;
+  const beamFlags    = SPF_FULLBRIGHT;
+  const beamAngle    = 0.0;
+  const beamStep     = 5.0;
+  const beamVel      = 0.0;
+  const beamAcc      = 0.0;
 
 } // class m8f_ls_EventHandler

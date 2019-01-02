@@ -11,7 +11,7 @@ OptionMenu    "m8f_ls_Options"
   Title       "Laser Sight Options"
 
   StaticText  ""
-  StaticText  "Settings", "Blue"
+  StaticText  "Settings", 1
   Option      "Show Laser Sight"  , "m8f_wm_ShowLaserSight" , "OnOff"
   Option      "Options Update Period", "m8f_ls_UpdatePeriod", "m8f_ls_UpdatePeriodOptions"
 
@@ -25,11 +25,16 @@ OptionMenu    "m8f_ls_Options"
   Slider      "Opacity"           , "m8f_ls_Opacity"        , 0.0, 1.0, 0.05, 2
 
   StaticText  ""
-  StaticText  "Commands", "Blue"
+  StaticText  "Beam (Particles)", 1
+  Option      "Beam Enabled", "m8f_ls_BeamEnabled", "OnOff"
+  Option      "$GLPREFMNU_PARTICLESTYLE", gl_particles_style, "Particles"
+
+  StaticText  ""
+  StaticText  "Commands", 1
   Control     "Toggle Laser Sight", "toggle_laser_sight"
 
   StaticText  ""
-  StaticText  "Target Spy Cross-mod Options", "Blue"
+  StaticText  "Target Spy Cross-mod Options", 1
 
   Option      "Change color on target" , "m8f_wm_TSChangeLaserColor", "OnOff"
   ColorPicker "Color on target"   , "m8f_ls_ColorOnTarget"

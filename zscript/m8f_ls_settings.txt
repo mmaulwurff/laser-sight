@@ -34,6 +34,8 @@ class m8f_ls_Settings
   double scale;
   double opacity;
 
+  bool   beamEnabled;
+
   private void read(PlayerInfo player)
   {
     targetColorChange   = CVar.GetCVar("m8f_wm_TSChangeLaserColor"    , player).GetInt();
@@ -42,12 +44,14 @@ class m8f_ls_Settings
     hideOnSlot1         = CVar.GetCVar("m8f_ls_HideOnSlot1"           , player).GetInt();
     hideOnCloseDistance = CVar.GetCVar("m8f_ls_hide_close"            , player).GetInt();
 
-    noTargetColor     = CVar.GetCVar("m8f_ls_CustomColor"        , player).GetString();
-    targetColor       = CVar.GetCVar("m8f_ls_ColorOnTarget"      , player).GetString();
-    friendlyColor     = CVar.GetCVar("m8f_ls_FriendlyColor"      , player).GetString();
+    noTargetColor       = CVar.GetCVar("m8f_ls_CustomColor"           , player).GetString();
+    targetColor         = CVar.GetCVar("m8f_ls_ColorOnTarget"         , player).GetString();
+    friendlyColor       = CVar.GetCVar("m8f_ls_FriendlyColor"         , player).GetString();
 
-    scale             = CVar.GetCVar("m8f_ls_Scale"              , player).GetFloat();
-    opacity           = CVar.GetCVar("m8f_ls_Opacity"            , player).GetFloat();
+    scale               = CVar.GetCVar("m8f_ls_Scale"                 , player).GetFloat();
+    opacity             = CVar.GetCVar("m8f_ls_Opacity"               , player).GetFloat();
+
+    beamEnabled         = CVar.GetCVar("m8f_ls_BeamEnabled"           , player).GetInt();
   }
 
   m8f_ls_Settings init(PlayerInfo player)
