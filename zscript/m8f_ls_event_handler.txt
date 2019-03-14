@@ -143,9 +143,8 @@ class m8f_ls_EventHandler : EventHandler
   {
     color   beamColor = shade;
     double  size      = 2.0 * _settings.scale;
-    double  cameraZ   = a.player.mo.attackZOffset + a.height / 2 - (a.player.viewHeight - a.player.viewZ);
+    double  cameraZ   = a.player.mo.attackZOffset + a.height / 2 + (a.player.viewHeight - a.player.viewZ);
     vector3 relPos    = targetPos - a.pos;
-    relPos.z -= cameraZ;
     int     nSteps    = distance / beamStep;
     double  xStep     = relPos.x / nSteps;
     double  yStep     = relPos.y / nSteps;
@@ -157,7 +156,7 @@ class m8f_ls_EventHandler : EventHandler
     {
       double xoff = xStep * i;
       double yoff = yStep * i;
-      double zoff = zStep * i + cameraZ;
+      double zoff = zStep * i;
 
       a.A_SpawnParticle( beamColor, beamFlags, beamLifetime, size, beamAngle
                        , xoff, yoff, zoff

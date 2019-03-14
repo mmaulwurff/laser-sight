@@ -13,7 +13,8 @@
 - optional particle beam
 
 ## Thanks
-- PixelWAD, Someone64, and Tesculpture for feature suggestions
+- PixelWAD, Someone64, Tesculpture, and RedClairefield for feature
+  suggestions and bug reports.
 
 ## Copying
 Author: m8f
