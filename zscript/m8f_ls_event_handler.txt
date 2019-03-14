@@ -141,22 +141,25 @@ class m8f_ls_EventHandler : EventHandler
 
   private void showBeam(Actor a, vector3 targetPos, double distance, string shade)
   {
-    color   beamColor = shade;
-    double  size      = 2.0 * _settings.scale;
-    double  cameraZ   = a.player.mo.attackZOffset + a.height / 2 + (a.player.viewHeight - a.player.viewZ);
-    vector3 relPos    = targetPos - a.pos;
-    int     nSteps    = distance / beamStep;
-    double  xStep     = relPos.x / nSteps;
-    double  yStep     = relPos.y / nSteps;
-    double  zStep     = relPos.z / nSteps;
-    double  alpha     = _settings.opacity;
-    int     drawSteps = nSteps - 2;
+    color   beamColor  = shade;
+    double  size       = 2.0 * _settings.beamScale;
+
+    double  viewHeight = a.player.viewz - PlayerPawn(a).attackZOffset;
+    targetPos.z -= viewHeight;
+
+    vector3 relPos     = targetPos - a.pos;
+    int     nSteps     = distance / beamStep;
+    double  xStep      = relPos.x / nSteps;
+    double  yStep      = relPos.y / nSteps;
+    double  zStep      = relPos.z / nSteps;
+    double  alpha      = _settings.opacity;
+    int     drawSteps  = nSteps - 2;
 
     for (int i = 1; i < drawSteps; ++i)
     {
       double xoff = xStep * i;
       double yoff = yStep * i;
-      double zoff = zStep * i;
+      double zoff = zStep * i + viewHeight;
 
       a.A_SpawnParticle( beamColor, beamFlags, beamLifetime, size, beamAngle
                        , xoff, yoff, zoff

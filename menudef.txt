@@ -26,8 +26,9 @@ OptionMenu    "m8f_ls_Options"
 
   StaticText  ""
   StaticText  "Beam (Particles)", 1
-  Option      "Beam Enabled", "m8f_ls_BeamEnabled", "OnOff"
-  Option      "$GLPREFMNU_PARTICLESTYLE", gl_particles_style, "Particles"
+  Option      "Beam Enabled"             , "m8f_ls_BeamEnabled" , "OnOff"
+  Option      "$GLPREFMNU_PARTICLESTYLE" , gl_particles_style   , "Particles"
+  Slider      "Scale"                    , "m8f_ls_BeamScale"   , 0.2, 5.0, 0.1, 1
 
   StaticText  ""
   StaticText  "Commands", 1

@@ -32,6 +32,7 @@ class m8f_ls_Settings
   string friendlyColor;
 
   double scale;
+  double beamScale;
   double opacity;
 
   bool   beamEnabled;
@@ -49,6 +50,7 @@ class m8f_ls_Settings
     friendlyColor       = CVar.GetCVar("m8f_ls_FriendlyColor"         , player).GetString();
 
     scale               = CVar.GetCVar("m8f_ls_Scale"                 , player).GetFloat();
+    beamScale           = CVar.GetCVar("m8f_ls_BeamScale"             , player).GetFloat();
     opacity             = CVar.GetCVar("m8f_ls_Opacity"               , player).GetFloat();
 
     beamEnabled         = CVar.GetCVar("m8f_ls_BeamEnabled"           , player).GetInt();
