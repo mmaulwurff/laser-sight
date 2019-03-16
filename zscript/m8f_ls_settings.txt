@@ -37,6 +37,7 @@ class m8f_ls_Settings
   double opacity;
 
   bool   beamEnabled;
+  double beamStep;
 
   private void read(PlayerInfo player)
   {
@@ -56,6 +57,7 @@ class m8f_ls_Settings
     opacity             = CVar.GetCVar("m8f_ls_Opacity"               , player).GetFloat();
 
     beamEnabled         = CVar.GetCVar("m8f_ls_BeamEnabled"           , player).GetInt();
+    beamStep            = CVar.GetCVar("m8f_ls_BeamStep"              , player).GetFloat();
   }
 
   m8f_ls_Settings init(PlayerInfo player)

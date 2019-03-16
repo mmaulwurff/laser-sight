@@ -14,3 +14,4 @@ user color  m8f_ls_ColorOnTarget  = "00 FF FF";
 user color  m8f_ls_FriendlyColor  = "00 FF 00";
 
 user bool   m8f_ls_BeamEnabled    = false;
+user float  m8f_ls_BeamStep       = 5.0;

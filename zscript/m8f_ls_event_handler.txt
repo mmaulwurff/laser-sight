@@ -150,7 +150,7 @@ class m8f_ls_EventHandler : EventHandler
     targetPos.z -= viewHeight;
 
     vector3 relPos = targetPos - a.pos;
-    int     nSteps = distance / beamStep;
+    int     nSteps = distance / _settings.beamStep;
 
     if (nSteps == 0) { return; }
 
@@ -213,7 +213,6 @@ class m8f_ls_EventHandler : EventHandler
   const beamLifetime = 1;
   const beamFlags    = SPF_FULLBRIGHT;
   const beamAngle    = 0.0;
-  const beamStep     = 5.0;
   const beamVel      = 0.0;
   const beamAcc      = 0.0;
 
