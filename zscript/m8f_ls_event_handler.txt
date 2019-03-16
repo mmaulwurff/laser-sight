@@ -149,15 +149,18 @@ class m8f_ls_EventHandler : EventHandler
     double  viewHeight = a.player.viewz - a.pos.z - PlayerPawn(a).attackZOffset;
     targetPos.z -= viewHeight;
 
-    vector3 relPos     = targetPos - a.pos;
-    int     nSteps     = distance / beamStep;
-    double  xStep      = relPos.x / nSteps;
-    double  yStep      = relPos.y / nSteps;
-    double  zStep      = relPos.z / nSteps;
-    double  alpha      = _settings.opacity;
-    int     drawSteps  = nSteps - 2;
+    vector3 relPos = targetPos - a.pos;
+    int     nSteps = distance / beamStep;
 
-    for (int i = 1; i < drawSteps; ++i)
+    if (nSteps == 0) { return; }
+
+    double  xStep     = relPos.x / nSteps;
+    double  yStep     = relPos.y / nSteps;
+    double  zStep     = relPos.z / nSteps;
+    double  alpha     = _settings.opacity;
+    int     drawSteps = nSteps - 2;
+
+    for (int i = 2; i < drawSteps; ++i)
     {
       double xoff = xStep * i;
       double yoff = yStep * i;
