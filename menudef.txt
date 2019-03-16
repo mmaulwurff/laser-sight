@@ -19,6 +19,7 @@ OptionMenu    "m8f_ls_Options"
   ColorPicker "Color"             , "m8f_ls_CustomColor"
   Option      "Hide On Slot 1"    , "m8f_ls_HideOnSlot1"    , "OnOff"
   Option      "Hide On Small Distance", "m8f_ls_hide_close" , "OnOff"
+  Option      "Show only if weapon is ready", "m8f_ls_OnlyWhenReady", "OnOff"
 
   StaticText  ""
   Slider      "Scale"             , "m8f_ls_Scale"          , 0.2, 5.0, 0.1, 1

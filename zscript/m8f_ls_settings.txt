@@ -26,6 +26,7 @@ class m8f_ls_Settings
 
   bool   hideOnSlot1;
   bool   hideOnCloseDistance;
+  bool   onlyWhenReady;
 
   string noTargetColor;
   string targetColor;
@@ -44,6 +45,7 @@ class m8f_ls_Settings
 
     hideOnSlot1         = CVar.GetCVar("m8f_ls_HideOnSlot1"           , player).GetInt();
     hideOnCloseDistance = CVar.GetCVar("m8f_ls_hide_close"            , player).GetInt();
+    onlyWhenReady       = CVar.GetCVar("m8f_ls_OnlyWhenReady"         , player).GetInt();
 
     noTargetColor       = CVar.GetCVar("m8f_ls_CustomColor"           , player).GetString();
     targetColor         = CVar.GetCVar("m8f_ls_ColorOnTarget"         , player).GetString();

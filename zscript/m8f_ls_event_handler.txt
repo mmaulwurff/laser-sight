@@ -54,6 +54,8 @@ class m8f_ls_EventHandler : EventHandler
 
     if (_settings.hideOnSlot1 && IsSlot1(_player)) { return; }
 
+    if (_settings.onlyWhenReady && !IsWeaponReady(_player)) { return; }
+
     bool showLaserSight = CVar.GetCVar("m8f_wm_ShowLaserSight", _player).GetInt();
     if (!showLaserSight) { return; }
 
@@ -188,6 +190,16 @@ class m8f_ls_EventHandler : EventHandler
   {
     bool isTitlemap = (level.mapname == "TITLEMAP");
     return isTitlemap;
+  }
+
+  private static bool IsWeaponReady(PlayerInfo player)
+  {
+    if (!player) { return false; }
+
+    bool isReady = (player.WeaponState & WF_WEAPONREADY)
+      || (player.WeaponState & WF_WEAPONREADYALT);
+
+    return isReady;
   }
 
   // constants section /////////////////////////////////////////////////////////
