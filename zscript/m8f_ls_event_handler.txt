@@ -144,7 +144,7 @@ class m8f_ls_EventHandler : EventHandler
     color   beamColor  = shade;
     double  size       = 2.0 * _settings.beamScale;
 
-    double  viewHeight = a.player.viewz - PlayerPawn(a).attackZOffset;
+    double  viewHeight = a.player.viewz - a.pos.z - PlayerPawn(a).attackZOffset;
     targetPos.z -= viewHeight;
 
     vector3 relPos     = targetPos - a.pos;
