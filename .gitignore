@@ -8,17 +8,10 @@ changelog.txt
 !*.md
 !*.sh
 !*.lmp
+!*.zs
 !.gitignore
 !textures*
 *~
-
-!source
-source/*
-!source/*.acs
-
-!acs
-acs/*
-!acs/*.o
 
 !sprites
 sprites/*
@@ -27,4 +20,4 @@ sprites/*
 
 !zscript
 zscript/*
-!zscript/*.txt
+!zscript/*.zs

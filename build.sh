@@ -15,9 +15,10 @@ git log --date=short --pretty=format:"-%d %ad %s%n" | \
 && \
 zip $name.pk3 \
     sprites/*.png \
-    zscript/*.txt \
+    zscript/*.zs \
     *.md \
     *.txt \
+    *.zs \
 && \
 cp $name.pk3 $name-$(git describe --abbrev=0 --tags).pk3 \
 && \
