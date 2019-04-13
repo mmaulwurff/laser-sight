@@ -4,19 +4,22 @@
 
 [Git Repository](https://github.com/mmaulwurff/laser-sight)
 
-[m8f's Toolbox](https://forum.zdoom.org/search.php?keywords=minimod&author=m8f&sr=topics)
+[m8f's Toolbox](https://mmaulwurff.github.io/pages/toolbox)
 
 ## Features
+
 - visible on all distances
 - configurable color and size
-- option to hide when weapon in Slot 1 is selected
+- options to hide in various situations
 - optional particle beam
 
 ## Thanks
-- PixelWAD, Someone64, Tesculpture, and RedClairefield for feature
-  suggestions and bug reports.
+
+- PixelWAD, Someone64, Tesculpture, RedClairefield, and Apeirogon for
+  feature suggestions and bug reports.
 
 ## Copying
+
 Author: m8f
 
 License: GPLv3 (see copying.txt)
