@@ -1,7 +1,7 @@
-AddKeySection "Laser Sight" "LaserSight"
+AddKeySection "$M8F_LS_COMMANDS_CAPTION" "LaserSight"
 
-alias toggle_laser_sight "test $m8f_wm_ShowLaserSight turn_laser_sight_off turn_laser_sight_on"
+alias toggle_laser_sight   "test $m8f_wm_ShowLaserSight turn_laser_sight_off turn_laser_sight_on"
 alias turn_laser_sight_on  "m8f_wm_ShowLaserSight 1"
 alias turn_laser_sight_off "m8f_wm_ShowLaserSight 0"
 
-AddMenuKey "Toggle Laser Sight" toggle_laser_sight
+AddMenuKey "$M8F_LS_TOGGLE" toggle_laser_sight

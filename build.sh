@@ -19,6 +19,7 @@ zip $name.pk3 \
     *.md \
     *.txt \
     *.zs \
+    language.enu \
 && \
 cp $name.pk3 $name-$(git describe --abbrev=0 --tags).pk3 \
 && \
