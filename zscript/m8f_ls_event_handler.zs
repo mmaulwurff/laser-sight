@@ -105,7 +105,14 @@ class m8f_ls_EventHandler : EventHandler
     Actor a = player.mo;
     if (a == null) { return; }
 
-    double pitch    = a.AimTarget() ? a.BulletSlope(null, ALF_PORTALRESTRICT) : a.pitch;
+    double pitch = a.AimTarget() ? a.BulletSlope(null, ALF_PORTALRESTRICT) : a.pitch;
+
+    MaybeShowDot(pitch, a, negative, friendly);
+    MaybeShowBeam(pitch, a, negative, friendly);
+  }
+
+  private void MaybeShowDot(double pitch, Actor a, bool negative, bool friendly)
+  {
     Actor  tempPuff = a.LineAttack( a.angle
                                   , 4000.0
                                   , pitch
@@ -134,14 +141,34 @@ class m8f_ls_EventHandler : EventHandler
     _puff.bInvisible = false;
     _puff.alpha      = opacity;
     _puff.SetOrigin(tempPuff.pos, true);
-
-    if (_settings.beamEnabled)
-    {
-      showBeam(a, tempPuff.pos, distance, shade);
-    }
   }
 
-  private void showBeam(Actor a, vector3 targetPos, double distance, string shade)
+  private void MaybeShowBeam(double pitch, Actor a, bool negative, bool friendly)
+  {
+    if (!_settings.beamEnabled) { return; }
+
+    Actor  tempPuff = a.LineAttack( a.angle
+                                  , 4000.0
+                                  , pitch
+                                  , 0
+                                  , "none"
+                                  , "m8f_ls_BeamInvisiblePuff"
+                                  , lFlags
+                                  );
+
+    if (tempPuff == null) { return; }
+
+    double distance = a.Distance3D(tempPuff);
+
+    string shade;
+    if (friendly)      { shade = _settings.friendlyColor; }
+    else if (negative) { shade = _settings.targetColor;   }
+    else               { shade = _settings.noTargetColor; }
+
+    showBeam(a, tempPuff.pos, distance, shade);
+  }
+
+  private void ShowBeam(Actor a, vector3 targetPos, double distance, string shade)
   {
     color   beamColor  = shade;
     double  size       = 2.0 * _settings.beamScale;
@@ -150,7 +177,7 @@ class m8f_ls_EventHandler : EventHandler
     targetPos.z -= viewHeight;
 
     vector3 relPos = targetPos - a.pos;
-    int     nSteps = distance / _settings.beamStep;
+    int     nSteps = int(distance / _settings.beamStep);
 
     if (nSteps == 0) { return; }
 

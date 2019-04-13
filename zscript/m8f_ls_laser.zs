@@ -50,3 +50,20 @@ class m8f_ls_PuffBase : Actor
 
 class m8f_ls_InvisiblePuff : m8f_ls_PuffBase {States {Spawn: TNT1 A 0; Stop;}}
 class m8f_ls_LaserPuff     : m8f_ls_PuffBase {States {Spawn: TNT1 A 0; WDO1 A -1 BRIGHT; Stop;}}
+
+class m8f_ls_BeamInvisiblePuff : m8f_ls_PuffBase
+{
+
+  Default
+  {
+    +SKYEXPLODE;
+  }
+
+  States
+  {
+    Spawn:
+      TNT1 A 0;
+      Stop;
+  }
+
+} // class m8f_ls_BeamInvisiblePuff
