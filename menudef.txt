@@ -1,4 +1,4 @@
-OptionValue "m8f_ls_UpdatePeriodOptions"
+OptionValue m8f_ls_UpdatePeriodOptions
 {
   -1, "$M8F_LS_NEVER"
    0, "$M8F_LS_IMMEDIATELY"
@@ -11,23 +11,23 @@ OptionMenu m8f_ls_Options
   Title       "$M8F_LS_TITLE"
 
   StaticText  ""
-  Option      "$M8F_LS_SHOW"               , m8f_wm_ShowLaserSight , "OnOff"
-  Option      "$M8F_LS_UPDATE_PERIOD"      , m8f_ls_UpdatePeriod   , "m8f_ls_UpdatePeriodOptions"
+  Option      "$M8F_LS_SHOW"               , m8f_wm_ShowLaserSight , OnOff
+  Option      "$M8F_LS_UPDATE_PERIOD"      , m8f_ls_UpdatePeriod   , m8f_ls_UpdatePeriodOptions
 
   StaticText  ""
   ColorPicker "$M8F_LS_COLOR"              , m8f_ls_CustomColor
-  Option      "$M8F_LS_HIDE_SLOT_1"        , m8f_ls_HideOnSlot1   , "OnOff"
-  Option      "$M8F_LS_HIDE_CLOSE"         , m8f_ls_hide_close    , "OnOff"
-  Option      "$M8F_LS_ONLY_READY"         , m8f_ls_OnlyWhenReady , "OnOff"
+  Option      "$M8F_LS_HIDE_SLOT_1"        , m8f_ls_HideOnSlot1   , OnOff
+  Option      "$M8F_LS_HIDE_CLOSE"         , m8f_ls_hide_close    , OnOff
+  Option      "$M8F_LS_ONLY_READY"         , m8f_ls_OnlyWhenReady , OnOff
 
   StaticText  ""
-  Slider      "$M8F_LS_SCALE"              , m8f_ls_Scale          , 0.2, 5.0, 0.1, 1
-  Slider      "$M8F_LS_OPACITY"            , m8f_ls_Opacity        , 0.0, 1.0, 0.05, 2
+  Slider      "$M8F_LS_SCALE"              , m8f_ls_Scale   , 0.2, 5.0, 0.1, 1
+  Slider      "$M8F_LS_OPACITY"            , m8f_ls_Opacity , 0.0, 1.0, 0.05, 2
 
   StaticText  ""
   StaticText  "$M8F_LS_BEAM_CAPTION"       , 1
-  Option      "$M8F_LS_BEAM_ENABLED"       , m8f_ls_BeamEnabled , "OnOff"
-  Option      "$GLPREFMNU_PARTICLESTYLE"   , gl_particles_style , "Particles"
+  Option      "$M8F_LS_BEAM_ENABLED"       , m8f_ls_BeamEnabled , OnOff
+  Option      "$GLPREFMNU_PARTICLESTYLE"   , gl_particles_style , Particles
   Slider      "$M8F_LS_SCALE"              , m8f_ls_BeamScale   , 0.2, 5.0, 0.1, 1
   Slider      "$M8F_LS_BEAM_STEP"          , m8f_ls_BeamStep    , 0.5, 50.0, 0.5, 1
 
@@ -38,11 +38,11 @@ OptionMenu m8f_ls_Options
   StaticText  ""
   StaticText  "$M8F_LS_TARGET_SPY_CAPTION" , 1
 
-  Option      "$M8F_LS_CHANGE_ON_TARGET"   , m8f_wm_TSChangeLaserColor, "OnOff"
+  Option      "$M8F_LS_CHANGE_ON_TARGET"   , m8f_wm_TSChangeLaserColor, OnOff
   ColorPicker "$M8F_LS_COLOR_ON_TARGET"    , m8f_ls_ColorOnTarget
 
   StaticText  ""
-  Option      "$M8F_LS_CHANGE_ON_FRIEND"   , m8f_ls_TSChangeColorFriendly, "OnOff"
+  Option      "$M8F_LS_CHANGE_ON_FRIEND"   , m8f_ls_TSChangeColorFriendly, OnOff
   ColorPicker "$M8F_LS_COLOR_ON_FRIEND"    , m8f_ls_FriendlyColor
 
   StaticText  ""
