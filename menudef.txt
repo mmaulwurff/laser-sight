@@ -2,7 +2,6 @@ OptionMenu m8f_ls_Options
 {
   Title       "$M8F_LS_TITLE"
 
-  StaticText  ""
   Option      "$M8F_LS_SHOW"               , m8f_wm_ShowLaserSight , OnOff
 
   StaticText  ""
