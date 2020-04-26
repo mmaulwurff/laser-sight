@@ -44,12 +44,9 @@ OptionMenu m8f_ls_Options
   StaticText  ""
   Option      "$M8F_LS_CHANGE_ON_FRIEND"   , m8f_ls_TSChangeColorFriendly, OnOff
   ColorPicker "$M8F_LS_COLOR_ON_FRIEND"    , m8f_ls_FriendlyColor
-
-  StaticText  ""
 }
 
 AddOptionMenu OptionsMenu
 {
-  StaticText ""
   Submenu    "$M8F_LS_TITLE", m8f_ls_Options
 }
