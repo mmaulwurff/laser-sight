@@ -1,18 +1,9 @@
-OptionValue m8f_ls_UpdatePeriodOptions
-{
-  -1, "$M8F_LS_NEVER"
-   0, "$M8F_LS_IMMEDIATELY"
-  35, "$M8F_LS_1S"
- 105, "$M8F_LS_3S"
-}
-
 OptionMenu m8f_ls_Options
 {
   Title       "$M8F_LS_TITLE"
 
   StaticText  ""
   Option      "$M8F_LS_SHOW"               , m8f_wm_ShowLaserSight , OnOff
-  Option      "$M8F_LS_UPDATE_PERIOD"      , m8f_ls_UpdatePeriod   , m8f_ls_UpdatePeriodOptions
 
   StaticText  ""
   ColorPicker "$M8F_LS_COLOR"              , m8f_ls_CustomColor

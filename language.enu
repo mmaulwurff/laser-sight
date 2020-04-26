@@ -1,14 +1,8 @@
 [enu default]
 
-M8F_LS_NEVER              = "Never";
-M8F_LS_IMMEDIATELY        = "Immediately";
-M8F_LS_1S                 = "Every second";
-M8F_LS_3S                 = "Every three seconds";
-
 M8F_LS_TITLE              = "Laser Sight Options";
 
 M8F_LS_SHOW               = "Show Laser Sight";
-M8F_LS_UPDATE_PERIOD      = "Options update period";
 
 M8F_LS_COLOR              = "Color";
 M8F_LS_HIDE_SLOT_1        = "Hide on slot 1";

@@ -1,7 +1,6 @@
 user int    m8f_wm_ShowLaserSight = 0;
 user int    m8f_ls_HideOnSlot1    = 0;
 user bool   m8f_ls_OnlyWhenReady  = false;
-user int    m8f_ls_UpdatePeriod   = 35;
 user float  m8f_ls_Scale          = 1.0;
 user float  m8f_ls_BeamScale      = 1.0;
 user bool   m8f_wm_TSChangeLaserColor    = false;

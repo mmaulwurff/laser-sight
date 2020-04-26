@@ -16,14 +16,6 @@
 class m8f_ls_EventHandler : EventHandler
 {
 
-  // attributes section ////////////////////////////////////////////////////////
-
-  private bool            _isTitlemap;
-  private bool            _isInitialized;
-  private m8f_ls_Settings _settings;
-  private PlayerInfo      _player;
-  private Actor           _puff;
-
   // overrides section /////////////////////////////////////////////////////////
 
   override void OnRegister()
@@ -46,11 +38,9 @@ class m8f_ls_EventHandler : EventHandler
 
     _puff.bInvisible = true;
 
-    _settings.maybeUpdate(_player);
+    if (_settings.hideOnSlot1() && IsSlot1(_player)) { return; }
 
-    if (_settings.hideOnSlot1 && IsSlot1(_player)) { return; }
-
-    if (_settings.onlyWhenReady && !IsWeaponReady(_player)) { return; }
+    if (_settings.onlyWhenReady() && !IsWeaponReady(_player)) { return; }
 
     bool showLaserSight = CVar.GetCVar("m8f_wm_ShowLaserSight", _player).GetInt();
     if (!showLaserSight) { return; }
@@ -62,8 +52,8 @@ class m8f_ls_EventHandler : EventHandler
     bool hasTarget        = (targetCVar   != null && targetCVar.GetInt());
     bool isTargetFriendly = (friendlyCVar != null && friendlyCVar.GetInt());
 
-    bool negative = (_settings.targetColorChange   && hasTarget);
-    bool friendly = (_settings.friendlyColorChange && isTargetFriendly);
+    bool negative = (_settings.targetColorChange()   && hasTarget);
+    bool friendly = (_settings.friendlyColorChange() && isTargetFriendly);
 
     ShowLaserSight(negative, friendly, _player);
   }
@@ -89,7 +79,7 @@ class m8f_ls_EventHandler : EventHandler
     }
 
     _player        = players[consolePlayer];
-    _settings      = new("m8f_ls_Settings").init(_player);
+    _settings      = m8f_ls_Settings.of();
     _puff          = Actor.Spawn("m8f_ls_LaserPuff");
     _isInitialized = true;
 
@@ -121,15 +111,15 @@ class m8f_ls_EventHandler : EventHandler
     if (tempPuff == null) { return; }
 
     double distance = a.Distance3D(tempPuff);
-    if (_settings.hideOnCloseDistance && distance < minDistance) { return; }
+    if (_settings.hideOnCloseDistance() && distance < minDistance) { return; }
 
-    double scale   = _settings.scale * distance / 250.0;
-    double opacity = _settings.opacity;
+    double scale   = _settings.scale() * distance / 250.0;
+    double opacity = _settings.opacity();
 
     string shade;
-    if (friendly)      { shade = _settings.friendlyColor; }
-    else if (negative) { shade = _settings.targetColor;   }
-    else               { shade = _settings.noTargetColor; }
+    if (friendly)      { shade = _settings.friendlyColor(); }
+    else if (negative) { shade = _settings.targetColor();   }
+    else               { shade = _settings.noTargetColor(); }
 
     _puff.SetShade(shade);
     _puff.scale.x    = scale;
@@ -141,7 +131,7 @@ class m8f_ls_EventHandler : EventHandler
 
   private void MaybeShowBeam(double pitch, Actor a, bool negative, bool friendly)
   {
-    if (!_settings.beamEnabled) { return; }
+    if (!_settings.beamEnabled()) { return; }
 
     Actor  tempPuff = a.LineAttack( a.angle
                                   , 4000.0
@@ -157,9 +147,9 @@ class m8f_ls_EventHandler : EventHandler
     double distance = a.Distance3D(tempPuff);
 
     string shade;
-    if (friendly)      { shade = _settings.friendlyColor; }
-    else if (negative) { shade = _settings.targetColor;   }
-    else               { shade = _settings.noTargetColor; }
+    if (friendly)      { shade = _settings.friendlyColor(); }
+    else if (negative) { shade = _settings.targetColor();   }
+    else               { shade = _settings.noTargetColor(); }
 
     showBeam(a, tempPuff.pos, distance, shade);
   }
@@ -167,20 +157,20 @@ class m8f_ls_EventHandler : EventHandler
   private void ShowBeam(Actor a, vector3 targetPos, double distance, string shade)
   {
     color   beamColor  = shade;
-    double  size       = 2.0 * _settings.beamScale;
+    double  size       = 2.0 * _settings.beamScale();
 
     double  viewHeight = a.player.viewz - a.pos.z - PlayerPawn(a).attackZOffset;
     targetPos.z -= viewHeight;
 
     vector3 relPos = targetPos - a.pos;
-    int     nSteps = int(distance / _settings.beamStep);
+    int     nSteps = int(distance / _settings.beamStep());
 
     if (nSteps == 0) { return; }
 
     double  xStep     = relPos.x / nSteps;
     double  yStep     = relPos.y / nSteps;
     double  zStep     = relPos.z / nSteps;
-    double  alpha     = _settings.opacity;
+    double  alpha     = _settings.opacity();
     int     drawSteps = nSteps - 2;
 
     for (int i = 2; i < drawSteps; ++i)
@@ -238,5 +228,13 @@ class m8f_ls_EventHandler : EventHandler
   const beamAngle    = 0.0;
   const beamVel      = 0.0;
   const beamAcc      = 0.0;
+
+  // attributes section ////////////////////////////////////////////////////////
+
+  private bool            _isTitlemap;
+  private bool            _isInitialized;
+  private m8f_ls_Settings _settings;
+  private PlayerInfo      _player;
+  private Actor           _puff;
 
 } // class m8f_ls_EventHandler

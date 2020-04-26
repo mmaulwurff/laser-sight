@@ -16,62 +16,116 @@
 class m8f_ls_Settings
 {
 
-  bool   targetColorChange;
-  bool   friendlyColorChange;
+  bool   targetColorChange()   { return targetColorChangeCvar.getBool();   }
+  bool   friendlyColorChange() { return friendlyColorChangeCvar.getBool(); }
 
-  bool   hideOnSlot1;
-  bool   hideOnCloseDistance;
-  bool   onlyWhenReady;
+  bool   hideOnSlot1()         { return hideOnSlot1Cvar.getBool();         }
+  bool   hideOnCloseDistance() { return hideOnCloseDistanceCvar.getBool(); }
+  bool   onlyWhenReady()       { return onlyWhenReadyCvar.getBool();       }
 
-  string noTargetColor;
-  string targetColor;
-  string friendlyColor;
+  string noTargetColor()       { return noTargetColorCvar.getString();     }
+  string targetColor()         { return targetColorCvar.getString();       }
+  string friendlyColor()       { return friendlyColorCvar.getString();     }
 
-  double scale;
-  double beamScale;
-  double opacity;
+  double scale()               { return scaleCvar.getDouble();             }
+  double beamScale()           { return beamScaleCvar.getDouble();         }
+  double opacity()             { return opacityCvar.getDouble();           }
 
-  bool   beamEnabled;
-  double beamStep;
+  bool   beamEnabled()         { return beamEnabledCvar.getBool();         }
+  double beamStep()            { return beamStepCvar.getDouble();          }
 
-  private void read(PlayerInfo player)
+  static
+  m8f_ls_Settings of()
   {
-    targetColorChange   = CVar.GetCVar("m8f_wm_TSChangeLaserColor"    , player).GetInt();
-    friendlyColorChange = CVar.GetCVar("m8f_ls_TSChangeColorFriendly" , player).GetInt();
+    let result = new("m8f_ls_Settings");
 
-    hideOnSlot1         = CVar.GetCVar("m8f_ls_HideOnSlot1"           , player).GetInt();
-    hideOnCloseDistance = CVar.GetCVar("m8f_ls_hide_close"            , player).GetInt();
-    onlyWhenReady       = CVar.GetCVar("m8f_ls_OnlyWhenReady"         , player).GetInt();
+    result.targetColorChangeCvar   = ls_Cvar.of("m8f_wm_TSChangeLaserColor");
+    result.friendlyColorChangeCvar = ls_Cvar.of("m8f_ls_TSChangeColorFriendly");
 
-    noTargetColor       = CVar.GetCVar("m8f_ls_CustomColor"           , player).GetString();
-    targetColor         = CVar.GetCVar("m8f_ls_ColorOnTarget"         , player).GetString();
-    friendlyColor       = CVar.GetCVar("m8f_ls_FriendlyColor"         , player).GetString();
+    result.hideOnSlot1Cvar         = ls_Cvar.of("m8f_ls_HideOnSlot1");
+    result.hideOnCloseDistanceCvar = ls_Cvar.of("m8f_ls_hide_close");
+    result.onlyWhenReadyCvar       = ls_Cvar.of("m8f_ls_OnlyWhenReady");
 
-    scale               = CVar.GetCVar("m8f_ls_Scale"                 , player).GetFloat();
-    beamScale           = CVar.GetCVar("m8f_ls_BeamScale"             , player).GetFloat();
-    opacity             = CVar.GetCVar("m8f_ls_Opacity"               , player).GetFloat();
+    result.noTargetColorCvar       = ls_Cvar.of("m8f_ls_CustomColor");
+    result.targetColorCvar         = ls_Cvar.of("m8f_ls_ColorOnTarget");
+    result.friendlyColorCvar       = ls_Cvar.of("m8f_ls_FriendlyColor");
 
-    beamEnabled         = CVar.GetCVar("m8f_ls_BeamEnabled"           , player).GetInt();
-    beamStep            = CVar.GetCVar("m8f_ls_BeamStep"              , player).GetFloat();
+    result.scaleCvar               = ls_Cvar.of("m8f_ls_Scale");
+    result.beamScaleCvar           = ls_Cvar.of("m8f_ls_BeamScale");
+    result.opacityCvar             = ls_Cvar.of("m8f_ls_Opacity");
+
+    result.beamEnabledCvar         = ls_Cvar.of("m8f_ls_BeamEnabled");
+    result.beamStepCvar            = ls_Cvar.of("m8f_ls_BeamStep");
+
+    return result;
   }
 
-  m8f_ls_Settings init(PlayerInfo player)
+  private ls_Cvar targetColorChangeCvar;
+  private ls_Cvar friendlyColorChangeCvar;
+
+  private ls_Cvar hideOnSlot1Cvar;
+  private ls_Cvar hideOnCloseDistanceCvar;
+  private ls_Cvar onlyWhenReadyCvar;
+
+  private ls_Cvar noTargetColorCvar;
+  private ls_Cvar targetColorCvar;
+  private ls_Cvar friendlyColorCvar;
+
+  private ls_Cvar scaleCvar;
+  private ls_Cvar beamScaleCvar;
+  private ls_Cvar opacityCvar;
+
+  private ls_Cvar beamEnabledCvar;
+  private ls_Cvar beamStepCvar;
+
+} // class m8f_ls_Settings
+
+/**
+ * This class provides access to a user or server Cvar.
+ *
+ * Accessing Cvars through this class is faster because calling Cvar.GetCvar()
+ * is costly. This class caches the result of Cvar.GetCvar() and handles
+ * loading a savegame.
+ */
+class ls_Cvar
+{
+
+// public: /////////////////////////////////////////////////////////////////////
+
+  static
+  ls_Cvar of(String name)
   {
-    read(player);
-    return self;
+    let result = new("ls_Cvar");
+    result._name = name;
+    return result;
   }
 
-  void maybeUpdate(PlayerInfo player)
+  bool   isDefined() { load(); return (_cvar != NULL);   }
+
+  String getString() { load(); return _cvar.GetString(); }
+  bool   getBool()   { load(); return _cvar.GetInt();    }
+  int    getInt()    { load(); return _cvar.GetInt();    }
+  double getDouble() { load(); return _cvar.GetFloat();  }
+
+// private: ////////////////////////////////////////////////////////////////////
+
+  private
+  void load()
   {
-    int optionsUpdatePeriod = CVar.GetCVar("m8f_ls_UpdatePeriod", player).GetInt();
-
-    if (optionsUpdatePeriod == 0) { read(player); }
-
-    else if (optionsUpdatePeriod != -1
-             && (level.time % optionsUpdatePeriod) == 0)
+    if (_cvar == NULL)
     {
-      read(player);
+      PlayerInfo player = players[consolePlayer];
+
+      _cvar = Cvar.GetCvar(_name, player);
+
+      if (_cvar == NULL)
+      {
+        Console.Printf("Cvar %s not found.", _name);
+      }
     }
   }
 
-} // class m8f_ls_Settings
+  private String         _name;
+  private transient Cvar _cvar;
+
+} // class ls_Cvar
