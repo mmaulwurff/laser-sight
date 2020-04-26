@@ -39,21 +39,12 @@ class m8f_ls_EventHandler : EventHandler
     _puff.bInvisible = true;
 
     if (_settings.hideOnSlot1() && IsSlot1(_player)) { return; }
-
     if (_settings.onlyWhenReady() && !IsWeaponReady(_player)) { return; }
-
-    bool showLaserSight = CVar.GetCVar("m8f_wm_ShowLaserSight", _player).GetInt();
-    if (!showLaserSight) { return; }
-
+    if (!_settings.isEnabled()) { return; }
     if (_player.readyWeapon == null) { return; }
 
-    CVar targetCVar       = CVar.GetCVar("m8f_ts_has_target", _player);
-    CVar friendlyCVar     = CVar.GetCVar("m8f_ts_friendly_target", _player);
-    bool hasTarget        = (targetCVar   != null && targetCVar.GetInt());
-    bool isTargetFriendly = (friendlyCVar != null && friendlyCVar.GetInt());
-
-    bool negative = (_settings.targetColorChange()   && hasTarget);
-    bool friendly = (_settings.friendlyColorChange() && isTargetFriendly);
+    bool negative = (_settings.targetColorChange()   && _settings.hasTarget());
+    bool friendly = (_settings.friendlyColorChange() && _settings.isTargetFriendly());
 
     ShowLaserSight(negative, friendly, _player);
   }

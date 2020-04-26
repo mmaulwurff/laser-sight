@@ -34,6 +34,11 @@ class m8f_ls_Settings
   bool   beamEnabled()         { return beamEnabledCvar.getBool();         }
   double beamStep()            { return beamStepCvar.getDouble();          }
 
+  bool   isEnabled()           { return isEnabledCvar.getBool();           }
+
+  bool hasTarget()        { return hasTargetCvar     .isDefined() && hasTargetCvar     .getBool(); }
+  bool isTargetFriendly() { return friendlyTargetCvar.isDefined() && friendlyTargetCvar.getBool(); }
+
   static
   m8f_ls_Settings of()
   {
@@ -57,6 +62,11 @@ class m8f_ls_Settings
     result.beamEnabledCvar         = ls_Cvar.of("m8f_ls_BeamEnabled");
     result.beamStepCvar            = ls_Cvar.of("m8f_ls_BeamStep");
 
+    result.isEnabledCvar           = ls_Cvar.of("m8f_wm_ShowLaserSight");
+
+    result.hasTargetCvar           = ls_Cvar.of("m8f_ts_has_target");
+    result.friendlyTargetCvar      = ls_Cvar.of("m8f_ts_friendly_target");
+
     return result;
   }
 
@@ -77,6 +87,12 @@ class m8f_ls_Settings
 
   private ls_Cvar beamEnabledCvar;
   private ls_Cvar beamStepCvar;
+
+  private ls_Cvar isEnabledCvar;
+
+  // not settings, but public API.
+  private ls_Cvar hasTargetCvar;
+  private ls_Cvar friendlyTargetCvar;
 
 } // class m8f_ls_Settings
 
@@ -117,11 +133,6 @@ class ls_Cvar
       PlayerInfo player = players[consolePlayer];
 
       _cvar = Cvar.GetCvar(_name, player);
-
-      if (_cvar == NULL)
-      {
-        Console.Printf("Cvar %s not found.", _name);
-      }
     }
   }
 
