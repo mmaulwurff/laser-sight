@@ -100,7 +100,7 @@ class m8f_ls_EventHandler : EventHandler
   private void MaybeShowDot(double pitch, Actor a, bool negative, bool friendly)
   {
     Actor  tempPuff = a.LineAttack( a.angle
-                                  , 4000.0
+                                  , maxDistance
                                   , pitch
                                   , 0
                                   , "none"
@@ -134,7 +134,7 @@ class m8f_ls_EventHandler : EventHandler
     if (!_settings.beamEnabled()) { return; }
 
     Actor  tempPuff = a.LineAttack( a.angle
-                                  , 4000.0
+                                  , maxDistance
                                   , pitch
                                   , 0
                                   , "none"
@@ -220,6 +220,7 @@ class m8f_ls_EventHandler : EventHandler
 
   // constants section /////////////////////////////////////////////////////////
 
+  const maxDistance = 400000.0;
   const minDistance = 50.0;
   const lFlags      = LAF_NOIMPACTDECAL | LAF_NORANDOMPUFFZ;
 
