@@ -1,4 +1,4 @@
-// Copyright 2018-2019 Alexander Kromm (m8f/mmaulwurff)
+// Copyright 2018-2020 Alexander Kromm (m8f/mmaulwurff)
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
