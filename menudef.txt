@@ -10,7 +10,10 @@ OptionMenu m8f_ls_Options
   Option      "$M8F_LS_HIDE_CLOSE"         , m8f_ls_hide_close    , OnOff
   Option      "$M8F_LS_ONLY_READY"         , m8f_ls_OnlyWhenReady , OnOff
   Option      "$LS_HIDE_ON_SKY"            , m8f_ls_hide_on_sky   , OnOff
+
+  StaticText  ""
   Option      "$LS_DISTANCE_SIZE"          , m8f_ls_distance_size , OnOff
+  Slider      "$LS_DISTANCE_MULT"          , m8f_ls_distance_mult , 0.5, 1.5, 0.01, 2
 
   StaticText  ""
   Slider      "$M8F_LS_SCALE"              , m8f_ls_Scale   , 0.2, 5.0, 0.1, 1

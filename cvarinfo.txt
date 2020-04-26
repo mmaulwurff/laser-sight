@@ -1,18 +1,20 @@
-user int    m8f_wm_ShowLaserSight = 0;
-user int    m8f_ls_HideOnSlot1    = 0;
-user bool   m8f_ls_OnlyWhenReady  = false;
-user float  m8f_ls_Scale          = 1.0;
-user float  m8f_ls_BeamScale      = 1.0;
-user bool   m8f_wm_TSChangeLaserColor    = false;
-user bool   m8f_ls_TSChangeColorFriendly = false;
-user float  m8f_ls_opacity        = 1.0;
-user bool   m8f_ls_hide_close     = true;
-user bool   m8f_ls_hide_on_sky    = true;
-user bool   m8f_ls_distance_size  = true;
+user int   m8f_wm_ShowLaserSight = 0;
+user int   m8f_ls_HideOnSlot1    = 0;
+user bool  m8f_ls_OnlyWhenReady  = false;
+user float m8f_ls_Scale          = 1.0;
+user float m8f_ls_BeamScale      = 1.0;
+user bool  m8f_wm_TSChangeLaserColor    = false;
+user bool  m8f_ls_TSChangeColorFriendly = false;
+user float m8f_ls_opacity        = 1.0;
+user bool  m8f_ls_hide_close     = true;
+user bool  m8f_ls_hide_on_sky    = true;
 
-user color  m8f_ls_CustomColor    = "FF 00 00";
-user color  m8f_ls_ColorOnTarget  = "00 FF FF";
-user color  m8f_ls_FriendlyColor  = "00 FF 00";
+user float m8f_ls_distance_mult  = 1.0;
+user bool  m8f_ls_distance_size  = true;
 
-user bool   m8f_ls_BeamEnabled    = false;
-user float  m8f_ls_BeamStep       = 5.0;
+user color m8f_ls_CustomColor    = "FF 00 00";
+user color m8f_ls_ColorOnTarget  = "00 FF FF";
+user color m8f_ls_FriendlyColor  = "00 FF 00";
+
+user bool  m8f_ls_BeamEnabled    = false;
+user float m8f_ls_BeamStep       = 5.0;
