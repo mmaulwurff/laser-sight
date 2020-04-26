@@ -109,8 +109,8 @@ class m8f_ls_EventHandler : EventHandler
     if (_settings.hideOnCloseDistance() && distance < minDistance) { return; }
 
     double scale = _settings.isDistanceSize()
-      ? _settings.scale() * distance / 250.0
-      : _settings.scale() * 2.0;
+      ? _settings.scale() * distance / 500.0
+      : _settings.scale();
 
     double opacity = _settings.opacity();
 
