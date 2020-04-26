@@ -90,14 +90,18 @@ class m8f_ls_EventHandler : EventHandler
 
   private void MaybeShowDot(double pitch, Actor a, bool negative, bool friendly)
   {
-    Actor  tempPuff = a.LineAttack( a.angle
-                                  , maxDistance
-                                  , pitch
-                                  , 0
-                                  , "none"
-                                  , "m8f_ls_InvisiblePuff"
-                                  , lFlags
-                                  );
+    let tempPuffClass = _settings.hideOnSky()
+      ? "m8f_ls_InvisiblePuff"
+      : "ls_InvisibleSkyPuff";
+
+    Actor tempPuff = a.LineAttack( a.angle
+                                 , maxDistance
+                                 , pitch
+                                 , 0
+                                 , "none"
+                                 , tempPuffClass
+                                 , lFlags
+                                 );
 
     if (tempPuff == null) { return; }
 

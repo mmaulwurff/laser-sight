@@ -15,7 +15,7 @@
 
 ## Thanks
 
-- PixelWAD, Someone64, Tesculpture, RedClairefield, and Apeirogon for
+- PixelWAD, Someone64, Tesculpture, RedClairefield, Apeirogon, and Sinael for
   feature suggestions and bug reports.
 
 ## Copying

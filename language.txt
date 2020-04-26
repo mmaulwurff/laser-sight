@@ -8,6 +8,7 @@ M8F_LS_COLOR              = "Color";
 M8F_LS_HIDE_SLOT_1        = "Hide on slot 1";
 M8F_LS_HIDE_CLOSE         = "Hide on small distance";
 M8F_LS_ONLY_READY         = "Show only if weapon is ready";
+LS_HIDE_ON_SKY            = "Hide on sky";
 
 M8F_LS_SCALE              = "Scale";
 M8F_LS_OPACITY            = "Opacity";

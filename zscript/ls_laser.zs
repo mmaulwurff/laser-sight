@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/
 
-class m8f_ls_PuffBase : Actor
+class m8f_ls_PuffBase : Actor abstract
 {
 
   Default
@@ -45,6 +45,8 @@ class m8f_ls_PuffBase : Actor
 
 class m8f_ls_InvisiblePuff : m8f_ls_PuffBase {States {Spawn: TNT1 A 0; Stop;}}
 class m8f_ls_LaserPuff     : m8f_ls_PuffBase {States {Spawn: TNT1 A 0; WDO1 A -1 BRIGHT; Stop;}}
+
+class ls_InvisibleSkyPuff : m8f_ls_InvisiblePuff { Default { +SKYEXPLODE; } }
 
 class m8f_ls_BeamInvisiblePuff : m8f_ls_PuffBase
 {

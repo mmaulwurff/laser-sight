@@ -22,6 +22,7 @@ class m8f_ls_Settings
   bool   hideOnSlot1()         { return hideOnSlot1Cvar.getBool();         }
   bool   hideOnCloseDistance() { return hideOnCloseDistanceCvar.getBool(); }
   bool   onlyWhenReady()       { return onlyWhenReadyCvar.getBool();       }
+  bool   hideOnSky()           { return hideOnSkyCvar.getBool();           }
 
   string noTargetColor()       { return noTargetColorCvar.getString();     }
   string targetColor()         { return targetColorCvar.getString();       }
@@ -50,6 +51,7 @@ class m8f_ls_Settings
     result.hideOnSlot1Cvar         = ls_Cvar.of("m8f_ls_HideOnSlot1");
     result.hideOnCloseDistanceCvar = ls_Cvar.of("m8f_ls_hide_close");
     result.onlyWhenReadyCvar       = ls_Cvar.of("m8f_ls_OnlyWhenReady");
+    result.hideOnSkyCvar           = ls_Cvar.of("m8f_ls_hide_on_sky");
 
     result.noTargetColorCvar       = ls_Cvar.of("m8f_ls_CustomColor");
     result.targetColorCvar         = ls_Cvar.of("m8f_ls_ColorOnTarget");
@@ -76,6 +78,7 @@ class m8f_ls_Settings
   private ls_Cvar hideOnSlot1Cvar;
   private ls_Cvar hideOnCloseDistanceCvar;
   private ls_Cvar onlyWhenReadyCvar;
+  private ls_Cvar hideOnSkyCvar;
 
   private ls_Cvar noTargetColorCvar;
   private ls_Cvar targetColorCvar;
