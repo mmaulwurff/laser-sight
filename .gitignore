@@ -1,24 +1,21 @@
-# Ignore everything
+# Ignore everything, but not directories:
+
 *
+!**/
 
-# Except txt, but not changelog
-!*.txt
-changelog.txt
+# Except the following file types:
 
-!*.md
-!*.sh
-!*.lmp
-!*.zs
 !.gitignore
-!textures*
-!language.enu
-*~
+!.gitmodules
+!.gitattributes
 
-!sprites
-sprites/*
-!sprites/*.png
-!sprites/*.lmp
+!**.txt
+!**.md
+!**.zs
+!**.sh
+!**.png
+!**.lmp
 
-!zscript
-zscript/*
-!zscript/*.zs
+# Do ignore this:
+
+changelog.txt
