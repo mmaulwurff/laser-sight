@@ -15,8 +15,8 @@
 
 ## Thanks
 
-- PixelWAD, Someone64, Tesculpture, RedClairefield, Apeirogon, and Sinael for
-  feature suggestions and bug reports.
+- PixelWAD, Someone64, Tesculpture, RedClairefield, Apeirogon, Sinael, and
+  ToxicMasculinity for feature suggestions and bug reports.
 
 ## Copying
 

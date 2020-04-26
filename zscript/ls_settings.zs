@@ -29,6 +29,7 @@ class m8f_ls_Settings
   string friendlyColor()       { return friendlyColorCvar.getString();     }
 
   double scale()               { return scaleCvar.getDouble();             }
+  bool   isDistanceSize()      { return distanceSizeCvar.getBool();        }
   double beamScale()           { return beamScaleCvar.getDouble();         }
   double opacity()             { return opacityCvar.getDouble();           }
 
@@ -58,6 +59,7 @@ class m8f_ls_Settings
     result.friendlyColorCvar       = ls_Cvar.of("m8f_ls_FriendlyColor");
 
     result.scaleCvar               = ls_Cvar.of("m8f_ls_Scale");
+    result.distanceSizeCvar        = ls_Cvar.of("m8f_ls_distance_size");
     result.beamScaleCvar           = ls_Cvar.of("m8f_ls_BeamScale");
     result.opacityCvar             = ls_Cvar.of("m8f_ls_Opacity");
 
@@ -85,6 +87,7 @@ class m8f_ls_Settings
   private ls_Cvar friendlyColorCvar;
 
   private ls_Cvar scaleCvar;
+  private ls_Cvar distanceSizeCvar;
   private ls_Cvar beamScaleCvar;
   private ls_Cvar opacityCvar;
 

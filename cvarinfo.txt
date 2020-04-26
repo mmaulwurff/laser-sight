@@ -8,6 +8,7 @@ user bool   m8f_ls_TSChangeColorFriendly = false;
 user float  m8f_ls_opacity        = 1.0;
 user bool   m8f_ls_hide_close     = true;
 user bool   m8f_ls_hide_on_sky    = true;
+user bool   m8f_ls_distance_size  = true;
 
 user color  m8f_ls_CustomColor    = "FF 00 00";
 user color  m8f_ls_ColorOnTarget  = "00 FF FF";

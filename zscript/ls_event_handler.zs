@@ -108,7 +108,10 @@ class m8f_ls_EventHandler : EventHandler
     double distance = a.Distance3D(tempPuff);
     if (_settings.hideOnCloseDistance() && distance < minDistance) { return; }
 
-    double scale   = _settings.scale() * distance / 250.0;
+    double scale = _settings.isDistanceSize()
+      ? _settings.scale() * distance / 250.0
+      : _settings.scale() * 2.0;
+
     double opacity = _settings.opacity();
 
     string shade;
